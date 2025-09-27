@@ -41,5 +41,6 @@ title: Analyse des besoins - Exigences
 ## Infrastructures
 
 ... on va ajouter on the go
+
 - API : REST + documentation OpenAPI
 - Stockage externe : CSV académiques, intégration Planifium, bot Discord JSON
