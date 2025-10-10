@@ -14,7 +14,7 @@ title: Vue d'ensemble
 
 ## Équipe
 
-- **Aya Dair** (20280089 -@Aya)
+- **Aya Dair**  (20280089 -@Aya)
 - **Celina Sid Abdelkaker** (20279666 – @Sid)
 - **Gabriel Viana** (20283304)
 - **Hamza Ali Ousalah** (20249230)
