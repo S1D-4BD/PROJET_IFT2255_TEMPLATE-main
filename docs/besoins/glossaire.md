@@ -14,3 +14,6 @@ title: Analyse des besoins - Glossaire
 | Résultats agrégés  | Données statistiques sur les performances académiques (moyennes, taux d’échec). |
 | Peer-review        | Avis croisés d’étudiants ayant suivi le même cours. |
 | API REST           | Interface technique permettant de communiquer entre frontend, backend et services externes. |
+| Authentification   | Processus de vérification de l'identité d'un utilisateur. |
+| Bases de données   | Système de stockage structuré des informations. |
+| Interface REST     | Style d'architecture pour concevoir des services web interopérables via HTTP. |
