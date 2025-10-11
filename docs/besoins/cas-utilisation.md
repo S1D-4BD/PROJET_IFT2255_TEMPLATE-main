@@ -62,6 +62,13 @@ Ils permettent de valider que les fonctionnalités répondent bien aux besoins e
 3. Le système affiche un tableau/graphique comparatif.
 4. L’étudiant analyse et peut sauvegarder/partager la comparaison.
 
+
+**Scénario alternatif :**
+1a. Moins de deux cours sélectionnés → 1a.1. Le bouton « Comparer » reste désactivé ;
+le système invite à ajouter un cours.
+
+
+
 ---
 
 ### CU03 – Consulter la fiche d’un cours
@@ -78,6 +85,9 @@ Ils permettent de valider que les fonctionnalités répondent bien aux besoins e
 2. Il clique sur un cours.
 3. Le système affiche les données officielles, académiques et avis étudiants.
 4. L’étudiant peut ajouter le cours à sa liste ou à une comparaison.
+
+**Scénario alternatif :**
+3a. Résultats académiques indisponibles → 3a.1. Afficher « Non disponible pour cette période ».
 
 ---
 
@@ -96,6 +106,8 @@ Ils permettent de valider que les fonctionnalités répondent bien aux besoins e
 3. L’étudiant modifie ses préférences.
 4. Le système valide et enregistre.
 5. Les modifications apparaissent immédiatement.
+
+**Scénario alternatif :**
 
 ---
 
