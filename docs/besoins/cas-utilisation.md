@@ -107,7 +107,7 @@ le système invite à ajouter un cours.
 4. Le système valide et enregistre.
 5. Les modifications apparaissent immédiatement.
 
-**Scénario alternatif :**
+
 
 ---
 
@@ -121,3 +121,12 @@ le système invite à ajouter un cours.
 **But** : Aider l’étudiant à découvrir des cours adaptés à son profil.
 
 **Scénario nominal :**
+1. L’étudiant ouvre « Recommandations ».
+2. Le système lit le profil et s'il est dispo, l’historique récent.
+3. Le système sélectionne des cours correspondant aux préférences et contraintes.
+4. Le système génère pour chaque cours une courte justification.
+5. Le système affiche la liste triée par pertinence avec accès à « Voir détails » et « Ajouter à la comparaison ».
+
+**Scénario alternatif :**
+(1-5)b. Perte réseau. → (1-5)b.1. Notification + « Réessayer » ; 
+si possible, suggestions hors-ligne basées sur l’historique local.
