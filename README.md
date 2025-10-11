@@ -1,3 +1,16 @@
+# TABLE DU PROJET
+
+- **Équipe** – membres et rôles du projet
+- **Description du projet** – objectif, contexte et sources de données
+- **Glossaire** – définitions des principaux termes
+- **Exigences** – fonctionnelles, non fonctionnelles et priorisation
+- **Types d’utilisateurs** – étudiants, TGDE, professeurs, invités
+- **Analyse des risques** – identification, impact et solutions
+- **Cas d’utilisation** – description et scénarios principaux
+- **Flux d’activités principaux** – interactions entre acteurs et système
+- **Diagrammes C4** – vue d’ensemble de l’architecture
+- **Besoins matériels** - stockage et intégration, infrastructure, base de données et API
+
 # Template de site web pour IFT2255
 
 Ce projet est un template pour le rapport à produire pour le cours IFT2255 (Génie logiciel), construit avec [MkDocs](https://www.mkdocs.org/) et le thème [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
@@ -8,7 +21,7 @@ Assurez-vous d’avoir les outils suivants installés :
 
 - Python **3.11** ou plus récent
 - `pip` (gestionnaire de paquets Python)
-- `pipenv` ou équivalent (gestion d’environnement virtuel) 
+- `pipenv` ou équivalent (gestion d’environnement virtuel)
   - Évite de polluer votre système et les conflits de version.
   - Installez-le avec `pip install pipenv`.
 
@@ -22,7 +35,7 @@ Assurez-vous d’avoir les outils suivants installés :
 
 ### Option 2: Le répertoire existe déjà
 
-1. Clonez ce dépôt (optionnel) pour obtenir le template localement 
+1. Clonez ce dépôt (optionnel) pour obtenir le template localement
 ```bash
 git clone git@github.com:udem-diro/template-rapport-ift2255.git
 ```
@@ -34,7 +47,7 @@ git clone git@github.com:udem-diro/template-rapport-ift2255.git
 
 > Vous avez maintenant le contenu du template sur votre poste. Il ne reste qu’à installer les dépendances pour commencer à l’utiliser.
 
-1. Activez l'environnement virtuel avec 
+1. Activez l'environnement virtuel avec
 ```bash
 pipenv shell
 ```
