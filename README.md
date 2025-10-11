@@ -1,5 +1,7 @@
 # TABLE DU PROJET
 
+Plateforme web permettant aux étudiants de l’UdeM, notamment au DIRO, de choisir leurs cours de manière fiable et anonyme. Le système combine des données officielles (Planifium, résultats académiques, prérequis, horaires) et des avis étudiants anonymisés (via Discord). Il propose des fonctionnalités de recherche avancée, comparaison multi-cours, consultation de fiches des cours détaillées, et recommandations en fonction des preférences de l'utilisateur.
+
 - **Équipe** – membres et rôles du projet
 - **Description du projet** – objectif, contexte et sources de données
 - **Glossaire** – définitions des principaux termes
