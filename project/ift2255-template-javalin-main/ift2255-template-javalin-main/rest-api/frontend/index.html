@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFT2255 - Gestion de Cours</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>IFT2255</h1>
+
+        <section>
+            <h2>USers dans la db</h2>
+            <button onclick="loadUsers()">Charger les utilisateurs</button>
+            <div id="users-list"></div>
+        </section>
+
+        <section>
+            <h2>Courses</h2>
+            <div>
+                <input type="text" id="courseId" placeholder="Ex: mat1400">
+                <button onclick="loadCourse()">Chercher le cours</button>
+            </div>
+            <div id="course-info"></div>
+        </section>
+
+        <section>
+            <h2>Creer un user (juste tgde)</h2>
+            <form id="createUserForm">
+                <input type="text" id="userName" placeholder="Nom" required>
+                <input type="matricule" id="userMatricule" placeholder="Matricule" required>
+                <button type="submit">Créer</button>
+            </form>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
