@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>projet ift2255</title>
@@ -9,7 +14,12 @@
 <body>
     <div class="container">
         <h1>OUTIL DE CONSEILS PLANIFIUM</h1>
-
+        <div class="student-info">
+            <h2><b>Espace de</b> <span id="student-name"></span></h2>
+            <p><b>Matricule:</b> <span id="student-matricule"></span></p>
+            <p><b>Cours complétés:</b> <span id="completed-courses"></span></p>
+            <button onclick="logout()">Déconnexion</button>
+        </div>
         <section>
             <h2>Étudiants inscrits</h2>
             <button onclick="loadUsers()">Charger les etudiants</button>
@@ -35,6 +45,28 @@
         </section>
     </div>
 
-    <script src="app.js"></script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const matricule = params.get('matricule');
+
+        if (!matricule) {
+            window.location.href = "landing.html";
+            //oui cpas le top securité mais anyways
+        }
+
+        let currentStudent = null; //fetch les info de la personne
+        async function loadStudent() {
+            const response = await fetch(`http://localhost:3000/students/${matricule}`);
+            currentStudent = await response.json();
+
+            document.getElementById('student-name').textContent = currentStudent.name;
+            document.getElementById('student-matricule').textContent = currentStudent.matricule;
+            document.getElementById('completed-courses').textContent =
+                currentStudent.completedCourses.join(', ') || 'Aucun cours credité';
+        }
+
+        loadStudent();
+    </script>
+        <script src="app.js"></script>
 </body>
 </html>

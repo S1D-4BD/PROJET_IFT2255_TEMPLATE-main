@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>projet ift2255</title>
@@ -18,13 +22,15 @@
 
     <script>
       function login(event){
-        event.preventDefault();
-        const input = document.getElementById('credentials').value;
-        if (input == "20280089" || input == "20279666" || input == "20283304" || input == "20249230") {
-            window.location.href = "index.html";
-        } else {
-            alert("credentials invalide");
-        }
+          event.preventDefault();
+          const input = document.getElementById('credentials').value;
+          const valides = ["20280089", "20279666", "20283304", "20249230"];
+
+          if (valides.includes(input)) {
+              window.location.href = "index.html?matricule=" + input;
+          } else {
+              alert("Matricule invalide");
+          }
       }
     </script>
 </body>

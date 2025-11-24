@@ -8,6 +8,8 @@ public class Course {
     private String name;
     private String description;
     private List<String> prerequis;
+    private int credits;
+    private String teacher;
 
     public Course() {}
 

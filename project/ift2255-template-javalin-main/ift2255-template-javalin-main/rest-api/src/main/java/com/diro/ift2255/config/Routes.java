@@ -41,16 +41,19 @@ import com.diro.ift2255.controller.StudentController;
 import com.diro.ift2255.service.CourseService;
 import com.diro.ift2255.util.HttpClientApi;
 import io.javalin.Javalin;
+
+import java.util.Map;
 import java.util.*;
 
 public class Routes {
-    // NOUVEAU: Stockage des commentaires en mémoire
+
     private static Map<String, List<Map<String, String>>> comments = new HashMap<>();
 
     public static void register(Javalin app) {
         registerStudentRoutes(app);
         registerCourseRoutes(app);
-        registerCommentRoutes(app);  // NOUVEAU
+        registerCommentRoutes(app);
+        //maybe ajouter le truc avec les tgde / prof??
     }
 
     private static void registerStudentRoutes(Javalin app) {
@@ -63,9 +66,11 @@ public class Routes {
         CourseService courseService = new CourseService(new HttpClientApi());
         CourseController courseController = new CourseController(courseService);
 
+
+        app.get("/courses/{id}/full", courseController::getCourseWithSchedule);
         app.get("/courses", courseController::getAllCourses);
 
-
+/*
         app.get("/courses/{id}", ctx -> {
             String id = ctx.pathParam("id");
             var course = courseService.getCourseById(id);
@@ -73,14 +78,46 @@ public class Routes {
             if (course.isPresent()) {
                 var c = course.get();
 
-                // Construire la réponse avec le cours + commentaires
                 Map<String, Object> response = new HashMap<>();
                 response.put("id", c.getId());
                 response.put("name", c.getName());
                 response.put("description", c.getDescription());
                 response.put("prerequis", c.getPrerequisites());
 
-                
+
+                String courseId = id.toUpperCase();
+                List<Map<String, String>> courseComments = comments.getOrDefault(courseId, new ArrayList<>());
+                response.put("comments", courseComments);
+
+                ctx.json(response);
+            } else {
+                ctx.status(404).json(Map.of("error", "Cours non trouvé"));
+            }
+        });*/
+        app.get("/courses/{id}", ctx -> {
+            String id = ctx.pathParam("id");  //get le param id du url
+            var course = courseService.getCourseById(id);
+
+            if (course.isPresent()) {
+                var c = course.get();
+
+                Map<String, Object> response = new HashMap<>();
+                response.put("id", c.getId());
+                response.put("name", c.getName());
+                response.put("description", c.getDescription());
+                response.put("prerequis", c.getPrerequisites());
+
+                //ca ct juste pr le prof omfg
+                try {
+                    String url = "https://planifium-api.onrender.com/api/v1/courses/" + id + "?include_schedule=true&schedule_semester=A25";
+                    var apiResponse = new HttpClientApi().get(java.net.URI.create(url));
+                    Map data = new com.fasterxml.jackson.databind.ObjectMapper().readValue(apiResponse.getBody(), Map.class);
+                    response.put("schedules", data.get("schedules"));
+                    response.put("prerequisite_courses", data.get("prerequisite_courses"));
+                } catch (Exception e) {
+                    response.put("schedules", null);
+                    response.put("prerequisite_courses", null);
+                }
                 String courseId = id.toUpperCase();
                 List<Map<String, String>> courseComments = comments.getOrDefault(courseId, new ArrayList<>());
                 response.put("comments", courseComments);
@@ -92,9 +129,8 @@ public class Routes {
         });
     }
 
-    // NOUVEAU: Routes pour les commentaires
     private static void registerCommentRoutes(Javalin app) {
-        // POST /comments - Ajouter un commentaire
+
         app.post("/comments", ctx -> {
             Map<String, String> comment = ctx.bodyAsClass(Map.class);
             String courseId = comment.get("courseId").toUpperCase();

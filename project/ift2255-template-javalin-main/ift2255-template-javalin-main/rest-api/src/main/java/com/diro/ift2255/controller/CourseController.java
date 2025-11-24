@@ -4,7 +4,7 @@ import io.javalin.http.Context;
 import com.diro.ift2255.model.Course;
 import com.diro.ift2255.service.CourseService;
 import com.diro.ift2255.util.ResponseUtil;
-
+import com.diro.ift2255.util.HttpClientApi;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +49,18 @@ public class CourseController {
             ctx.status(404).json(ResponseUtil.formatError("Aucun cours ne correspond à l'ID: " + id));
         }
     }
+        public void getCourseWithSchedule(Context ctx) {
+            String id = ctx.pathParam("id");
+            String semester = ctx.queryParam("semester") != null ? ctx.queryParam("semester") : "A25";
 
+            try {
+                String url = "https://planifium-api.onrender.com/api/v1/courses/" + id + "?include_schedule=true&schedule_semester=" + semester;
+                var response = new HttpClientApi().get(java.net.URI.create(url));
+                ctx.contentType("application/json").result(response.getBody());
+            } catch (Exception e) {
+                ctx.status(500).json(Map.of("error", e.getMessage()));
+            }
+        }
     /**
      * Vérifie que l'ID du cours est bien formé
      * @param courseId L'ID du cours à valider

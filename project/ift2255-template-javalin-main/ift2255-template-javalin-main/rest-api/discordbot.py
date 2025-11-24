@@ -7,6 +7,8 @@ from discord.ext import commands
 import re ##pr regex omg for once jlutilises sans me crever les yeux
 import requests
 
+
+import random
 import os
 from dotenv import load_dotenv
 
@@ -23,6 +25,12 @@ bot = commands.Bot(command_prefix='?', description=description, intents=intents)
 
 
 API_URL = "http://localhost:3000" ###url du backend
+
+
+def select_rand_name():
+  lstnomsbiz = ["Udémien", "Académicien", "Squatteur", "AlenaJunior", "MarkFeeling"]
+  i = random.randint(0,4)
+  return lstnomsbiz[i]
 
 def has_sigle(texte):
     ###on verifie par regex (thanks ift3700 ffs) les cours disponibles
@@ -63,7 +71,7 @@ async def on_ready():
                         for sigle in sigles:
                             data = {
                                 "courseId": sigle,
-                                "author": str(message.author),
+                                "author": select_rand_name(),
                                 "message": message.content
                             }
                             requests.post(f"{API_URL}/comments", json=data) ## pr chaque commentaire deja la jv les post pour que qd jv les get via get course/:id je le trouve direct
@@ -90,6 +98,7 @@ async def on_message(message):
                     "author": str(message.author),
                     "message": message.content
                 }
+
                 response = requests.post(f"{API_URL}/comments", json=data)
                 print(f"Envoye a API: {sigle} - Status: {response.status_code}")
             except Exception as e:
