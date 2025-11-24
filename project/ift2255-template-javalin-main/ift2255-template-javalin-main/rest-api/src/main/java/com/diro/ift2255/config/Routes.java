@@ -106,6 +106,7 @@ public class Routes {
                 response.put("name", c.getName());
                 response.put("description", c.getDescription());
                 response.put("prerequis", c.getPrerequisites());
+                response.put("credits", c.getCredits());
 
                 //ca ct juste pr le prof omfg
                 try {

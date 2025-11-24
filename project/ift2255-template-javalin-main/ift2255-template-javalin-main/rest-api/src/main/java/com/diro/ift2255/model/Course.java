@@ -8,7 +8,7 @@ public class Course {
     private String name;
     private String description;
     private List<String> prerequis;
-    private int credits;
+    private String credits;
     private String teacher;
 
     public Course() {}
@@ -29,4 +29,8 @@ public class Course {
 
     public String getDescription() { return description; }
     public void setDescription(String email) { this.description = email; }
+
+    public String getCredits(){
+        return credits; //??? dafk
+    }
 }

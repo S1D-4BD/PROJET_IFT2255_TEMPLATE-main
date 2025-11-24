@@ -50,6 +50,7 @@ async function loadCourse() {
         }
 
         const course = await response.json();
+        console.log(course)
         displayCourse(course);
     } catch (error) {
         showError('course-info', error.message);

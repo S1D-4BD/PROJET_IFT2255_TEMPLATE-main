@@ -29,8 +29,9 @@ API_URL = "http://localhost:3000" ###url du backend
 
 def select_rand_name():
   lstnomsbiz = ["Udémien", "Académicien", "Squatteur", "AlenaJunior", "MarkFeeling"]
-  i = random.randint(0,4)
-  return lstnomsbiz[i]
+  rand_int = random.randint(0, len(lstnomsbiz)-1)
+  NEWAUTHOR = lstnomsbiz[rand_int]
+  return NEWAUTHOR
 
 def has_sigle(texte):
     ###on verifie par regex (thanks ift3700 ffs) les cours disponibles
@@ -71,7 +72,7 @@ async def on_ready():
                         for sigle in sigles:
                             data = {
                                 "courseId": sigle,
-                                "author": select_rand_name(),
+                                "author": select_rand_name(), #str(message.author),
                                 "message": message.content
                             }
                             requests.post(f"{API_URL}/comments", json=data) ## pr chaque commentaire deja la jv les post pour que qd jv les get via get course/:id je le trouve direct
