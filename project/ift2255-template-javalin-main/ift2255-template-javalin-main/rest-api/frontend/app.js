@@ -55,13 +55,26 @@ async function loadCourse() {
     } catch (error) {
         showError('course-info', error.message);
     }
-}function displayCourse(course) {
+}
+
+function displayCourse(course) {
     const container = document.getElementById('course-info');
 
-    let professor = "Non assigné";
-    if (course.schedules?.[0]?.sections?.[0]?.teachers?.[0]) {
-        professor = course.schedules[0].sections[0].teachers[0];
+    let professors = [];
+    if (course.schedules?.[0]?.sections) {
+        course.schedules[0].sections.forEach(section => {
+
+            if (section.teachers) {
+                section.teachers.forEach(teacher => {
+
+                    if (!professors.includes(teacher)) {
+                        professors.push(teacher);
+                    }
+                });
+            }
+        });
     }
+    let professorText = professors.length > 0 ? professors.join('; ') : "Non assigné";  //mdr easy shit, juste cnocatener par ; each professor, sinn juste write nn assigned
 
     let prereqs = "Aucun";
     if (course.prerequisite_courses && course.prerequisite_courses.length > 0) {
@@ -71,11 +84,11 @@ async function loadCourse() {
     let commentsHtml = '';
     if (course.comments && course.comments.length > 0) {
         commentsHtml = '<div class="comments-section">';
-        commentsHtml += '<h3>section commentaires des étudiants</h3>';
+        commentsHtml += '<h3>Commentaires des étudiants</h3>';
         course.comments.forEach(c => {
             commentsHtml += `
                 <div class="comment">
-                    <b>${c.author}:</b> ${c.message}
+                    ${c.author}: ${c.message}
                 </div>
             `;
         });
@@ -85,15 +98,18 @@ async function loadCourse() {
     container.innerHTML = `
         <div class="course-card">
             <h3>${course.name || course.id}</h3>
-            <p><b>Sigle:</b> ${course.id}</p>
-            <p><b>Crédits:</b> ${course.credits || 3}</p>
-            <p><b>Professeur:</b> ${professor}</p>
-            <p><b>Prérequis:</b> ${prereqs}</p>
-            <p><b>Description:</b> ${course.description || 'Pas de description'}</p>
+            <p><b>Sigle</b>: ${course.id}</p>
+            <p><b>Crédits</b>: ${course.credits || 3}</p>
+            <p><b>Professeur(s)</b>: ${professorText}</p>
+            <p><b>Prérequis</b>: ${prereqs}</p>
+            <p><b>Description</b>: ${course.description || 'Pas de description'}</p>
             ${commentsHtml}
         </div>
     `;
 }
+
+
+
 document.getElementById('createUserForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
