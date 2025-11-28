@@ -14,6 +14,7 @@ public class AvisController {
           ctx.json(service.getAll());
       }
 
+
     public void getByCourse(Context ctx) {
       String courseId = ctx.pathParam("courseId");
       ctx.json(service.getByCourse(courseId));

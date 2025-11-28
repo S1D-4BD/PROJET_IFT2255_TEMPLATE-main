@@ -159,7 +159,7 @@ public class Routes {
     private static void registerAvisRoutes(Javalin app) {
 
         AvisController avisController = new AvisController();
-
+///
         app.get("/avis", avisController::getAll);
         app.get("/avis/{courseId}", avisController::getByCourse);
         app.get("/avis/{courseId}/stats", avisController::getStats);
