@@ -1,5 +1,6 @@
 package com.diro.ift2255.model;
 import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -31,6 +32,6 @@ public class Course {
     public void setDescription(String email) { this.description = email; }
 
     public String getCredits(){
-        return credits; //??? dafk
+        return credits; 
     }
 }
