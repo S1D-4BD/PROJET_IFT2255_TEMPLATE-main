@@ -1,5 +1,6 @@
 package com.diro.ift2255.service;
 /////suuuper important --->>> https://www.baeldung.com/jackson-object-mapper-tutorial
+import com.diro.ift2255.util.HttpClientApi;
 import com.fasterxml.jackson.core.type.TypeReference; // i need it to read json
 import com.fasterxml.jackson.databind.ObjectMapper; //aussi, on recupere du json pour creer un objet (par serialisation /deserialisation)
 
@@ -64,7 +65,7 @@ public class AvisService {
 
         int TOTALCharge = 0;
         for (Map<String, Object> avis : Listeavis) { //pr chaqu avis a traiter
-            int charge = (int) avis.get("workload");
+            int charge = (int) avis.get("charge");
             TOTALCharge += charge;
         }
 
@@ -97,7 +98,28 @@ public class AvisService {
 
         return resultat;
     }
+/////////////
 
+//
+//
+/*
+  private String[] getSentiment(String text) {
+    try {
+        HttpClientApi client = new HttpClientApi();
+        String url = "http://localhost:5050/sentiment?text=" + text;
+        var response = client.get(java.net.URI.create(url));
+
+        Map<String, Object> result = mapper.readValue(response.getBody(), Map.class);
+
+        String sentiment = (String) result.get("sentiment");
+        String score = result.get("score").toString();
+
+        return new String[]{sentiment, score};
+    } catch (Exception e) {
+        return new String[]{"neutre", "0"};
+    }
+}
+*///////////
 
     public Map<String, Object> create(Map<String, Object> avis) {
         List<Map<String, Object>> allavis = readFile();

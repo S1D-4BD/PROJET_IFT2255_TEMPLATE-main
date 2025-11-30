@@ -82,13 +82,42 @@ function displayCourse(course) {
     }
 
     let commentsHtml = '';
-    if (course.comments && course.comments.length > 0) {
+    /*if (course.comments && course.comments.length > 0) {
         commentsHtml = '<div class="comments-section">';
         commentsHtml += '<h3>Commentaires des étudiants</h3>';
         course.comments.forEach(c => {
             commentsHtml += `
                 <div class="comment">
                     ${c.author}: ${c.message}
+                </div>
+            `;
+        });
+        commentsHtml += '</div>';
+    } */
+   if (course.comments && course.comments.length > 0) {
+        commentsHtml = '<div class="comments-section">';
+        commentsHtml += '<h3>Commentaires des étudiants</h3>';
+        course.comments.forEach(c => {
+
+            /* VERSION AVEC SENTIMENT
+            let sentimentEmoji = '';
+            if (c.sentiment === 'positif') sentimentEmoji = '++';
+            else if (c.sentiment === 'negatif') sentimentEmoji = '--';
+            else sentimentEmoji = '+/-';
+
+            commentsHtml += `
+                <div class="comment">
+                    <p><b>${c.author}</b> ${sentimentEmoji}</p>
+                    <p>${c.message || ''}</p>
+                </div>
+            `;
+            */
+
+            // VERSION SANS LES SENTIMENTS
+            commentsHtml += `
+                <div class="comment">
+                    <p><b>${c.author}</b></p>
+                    <p>${c.message || ''}</p>
                 </div>
             `;
         });
