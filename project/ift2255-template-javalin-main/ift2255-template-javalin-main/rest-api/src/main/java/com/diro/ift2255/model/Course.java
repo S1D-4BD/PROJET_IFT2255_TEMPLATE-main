@@ -11,6 +11,7 @@ public class Course {
     private List<String> prerequis;
     private String credits;
     private String teacher;
+    private List<String> sessions;
 
     public Course() {}
 
@@ -32,6 +33,14 @@ public class Course {
     public void setDescription(String email) { this.description = email; }
 
     public String getCredits(){
-        return credits; 
+        return credits;
+    }
+
+    public List<String> getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(List<String> sessions) {
+        this.sessions = sessions;
     }
 }
