@@ -39,6 +39,7 @@ package com.diro.ift2255.config;
 import com.diro.ift2255.controller.CourseController;
 import com.diro.ift2255.controller.StudentController;
 import com.diro.ift2255.controller.AvisController; ////////////// pr comments now en test
+import com.diro.ift2255.controller.ComparaisonController;///
 import com.diro.ift2255.service.CourseService;
 import com.diro.ift2255.util.HttpClientApi;
 import io.javalin.Javalin;
@@ -55,6 +56,7 @@ public class Routes {
         registerCourseRoutes(app);
         registerCommentRoutes(app);
         registerAvisRoutes(app);
+        registerComparaisonRoutes(app);
         //maybe ajouter le truc avec les tgde / prof??
 
     }
@@ -164,5 +166,13 @@ public class Routes {
         app.get("/avis/{courseId}", avisController::getByCourse);
         app.get("/avis/{courseId}/stats", avisController::getStats);
         app.post("/avis", avisController::create);
+    }
+
+
+    private static void registerComparaisonRoutes(Javalin app) {
+        CourseService courseService = new CourseService(new HttpClientApi());
+        ComparaisonController comparaisonController = new ComparaisonController(courseService);
+
+        app.get("/compare", comparaisonController::compareCourses);
     }
 }

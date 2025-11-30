@@ -155,6 +155,116 @@ function showSuccess(elementId, message) {
     setTimeout(() => successDiv.remove(), 3000);
 }
 
+
+
+///////////////////////AVIS LOGIC//////////33
+
+
+
+async function loadAvis() {
+    const courseId = document.getElementById('avis-search-coursebyid').value.trim();
+
+    if (!courseId) {
+        showError('avis-list', 'Veuillez entrer un sigle de cour');
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_URL}/avis/${courseId}`);
+        const avis = await response.json();
+        displayAvis(avis);
+    } catch (error) {
+        showError('avis-list', error.message);
+    }
+}
+
+async function loadAvisStats() {
+    const courseId = document.getElementById('avis-search-coursebyid').value.trim();
+
+    if (!courseId) {
+        showError('avis-list', 'Veuillez entrer un sigle de cours');
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_URL}/avis/${courseId}/stats`);
+        const stats = await response.json();
+        displayAvisStats(stats, courseId);
+    } catch (error) {
+        showError('avis-list', error.message);
+    }
+}
+
+function displayAvis(avisList) {
+    const container = document.getElementById('avis-list');
+
+    if (avisList.length === 0) {
+        container.innerHTML = '<p>aucun avis pour ce cours</p>';
+        return;
+    }
+
+    container.innerHTML = '';
+
+    let count = 1;
+    for (let avis of avisList) {
+        let commentaire = avis.comment || '';
+
+
+        container.innerHTML += `
+            <div class="comment">
+                <h4>review# ${count}</h4>
+                <p><b>Note:</b> ${avis.rating}/5 | <b>Difficulté:</b> ${avis.difficulty}/5 | <b>Charge:</b> ${avis.charge}/5</p>
+                <p>--${commentaire}</p>
+            </div>
+        `;
+        count = count+1
+    }
+}
+
+function displayAvisStats(stats, courseId) {
+    const container = document.getElementById('avis-list');
+
+    container.innerHTML = `
+        <div class="course-card">
+            <h3>Stats pour ${courseId.toUpperCase()}</h3>
+            <p><b>Nombre d'avis:</b> ${stats.count}</p>
+            <p><b>Note moyenne:</b> ${stats.avg_rating}/5</p>
+            <p><b>Difficulté moyenne:</b> ${stats.avg_difficulty}/5</p>
+            <p><b>Charge moyenne:</b> ${stats.avg_charge}/5</p>
+        </div>
+    `;
+}
+
+document.getElementById('createAvisForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const avis = {
+        courseId: document.getElementById('avis-courseId').value.trim().toUpperCase(),
+        rating: parseInt(document.getElementById('avis-rating').value),
+        difficulty: parseInt(document.getElementById('avis-difficulty').value),
+        charge: parseInt(document.getElementById('avis-charge').value),
+        comment: document.getElementById('avis-comment').value
+    };
+
+    try {
+        const response = await fetch(`${API_URL}/avis`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(avis)
+        });
+
+        if (!response.ok) {
+            throw new Error('Erreur lors de la création');
+        }
+
+        showSuccess('createAvisForm', 'Avis SUCCESS');
+        document.getElementById('createAvisForm').reset();
+    } catch (error) {
+        showError('avis-form-result', error.message);
+    }
+});
+
+
 window.addEventListener('load', () => {
     //loadUsers();
 });

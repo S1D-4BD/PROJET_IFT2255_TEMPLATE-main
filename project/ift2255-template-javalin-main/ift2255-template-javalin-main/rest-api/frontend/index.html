@@ -36,6 +36,31 @@
         </section>
 
         <section>
+        <h2>Avis form</h2>
+
+            <div>
+                <h3>Consulter les avis</h3>
+                <input type="text" id="avis-search-coursebyid" placeholder="Ex: IFT1015">
+                <button onclick="loadAvis()">Voir les avis</button>
+                <button onclick="loadAvisStats()">Voir les stats</button>
+                <div id="avis-list"></div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h3>Laisser un avis</h3>
+                <form id="createAvisForm">
+                    <input type="text" id="avis-courseId" placeholder="Sigle (ex: IFT1015)" required>
+                    <input type="number" id="avis-rating" placeholder="Note (1-5)" min="1" max="5" required>
+                    <input type="number" id="avis-difficulty" placeholder="Difficulté (1-5)" min="1" max="5" required>
+                    <input type="number" id="avis-charge" placeholder="Charge (1-5)" min="1" max="5" required>
+                    <input type="text" id="avis-comment" placeholder="Commentaire" required>
+                    <button type="submit">Envoyer</button>
+                </form>
+                <div id="avis-form-result"></div>
+            </div>
+        </section>
+
+        <section>
             <h2>modifier une personne ??(juste tgde)</h2>
             <form id="createUserForm">
                 <input type="text" id="userName" placeholder="Nom" required>
@@ -43,6 +68,8 @@
                 <button type="submit">Créer</button>
             </form>
         </section>
+
+
     </div>
 
     <script>
