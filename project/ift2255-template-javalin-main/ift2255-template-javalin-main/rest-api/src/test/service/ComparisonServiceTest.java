@@ -54,6 +54,34 @@ class ComparaisonServiceTest {
         verify(courseService).getCourseById(idB);
     }
 
+    @Test
+    void compareCourses_whenOneCourseIsMissing_throwsIllegalArgumentException() {
+
+        // --- ARRANGE ---
+        String idA = "IFT1015";
+        String idB = "IFT9999"; // cours inexistant
+
+        // Seul le premier cours existe
+        when(courseService.getCourseById(idA)).thenReturn(Optional.of(mock(Course.class)));
+        when(courseService.getCourseById(idB)).thenReturn(Optional.empty());
+
+        
+        // On s'attend à ce qu'une IllegalArgumentException soit lancée
+        IllegalArgumentException ex = assertThrows(
+                IllegalArgumentException.class,
+                () -> comparaisonService.compareCourses(idA, idB),
+                "On s'attend à une exception si un des cours est introuvable"
+        );
+
+        
+        assertTrue(ex.getMessage().contains("introuvables"));
+
+        // Vérifie les appels au service
+        verify(courseService).getCourseById(idA);
+        verify(courseService).getCourseById(idB);
+    }
+
+
 
 
 
