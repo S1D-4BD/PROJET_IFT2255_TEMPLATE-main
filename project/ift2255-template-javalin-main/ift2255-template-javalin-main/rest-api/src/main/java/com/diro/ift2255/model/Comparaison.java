@@ -84,15 +84,24 @@ public class Comparaison {
         return result;
     }
 
-    public ComparaisonResult buildResult() {
-        ComparaisonResult result = new ComparaisonResult();
-        result.setCreditDifference(compareCredits());
-        result.setReviewScoreDifference(compareReviews());
-        result.setCommonSessions(getCommonSessions());
+        public ComparaisonResult buildResult() {
 
-        Map<String, List<String>> prereqs = getMissingPrerequisites();
-        result.setMissingPrerequisitesForA(prereqs.get(courseA.getId()));
-        result.setMissingPrerequisitesForB(prereqs.get(courseB.getId()));
-        return result;
+            ComparaisonResult result = new ComparaisonResult();
+            result.setCreditDifference(compareCredits());
+
+            double ratingA = safeAverageReviewScore(courseA);
+            double ratingB = safeAverageReviewScore(courseB);
+
+            result.setAvgRatingA(ratingA);
+            result.setAvgRatingB(ratingB);
+
+            result.setReviewScoreDifference(Math.abs(ratingA - ratingB));
+
+            result.setCommonSessions(getCommonSessions());
+
+            Map<String, List<String>> prereqs = getMissingPrerequisites();
+                result.setMissingPrerequisitesForA(prereqs.get(courseA.getId()));
+                result.setMissingPrerequisitesForB(prereqs.get(courseB.getId()));
+            return result;
     }
 }

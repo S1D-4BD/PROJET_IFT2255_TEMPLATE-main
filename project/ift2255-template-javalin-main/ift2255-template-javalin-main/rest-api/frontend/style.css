@@ -86,12 +86,32 @@ input:focus {
     margin-bottom: 5px;
 }
 
+
+
+/******/
+
+.student-info{
+    display: flex;
+     gap: 2rem;
+    align-items: flex-start;
+
+    vertical-align: middle;
+    background: #e0faff;
+    padding:15px;
+}
+
+.student-info h4{
+    margin:0;
+}
+.student-info button{
+    margin:auto;
+}
+
 form {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
 }
-
 .error {
     color: red;
     padding: 10px;
@@ -120,4 +140,62 @@ form {
     margin: 10px 0;
     color: #333;
 
+}
+
+
+.avis-section{
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: stretch; /* mais quel putain de bangeeerrrr*/
+  background: #f5f5f5;
+  padding:15px;
+}
+
+.avis-section > div:first-child{ /*trick pr premiere div enfant donc ca grandit et ca peut retreci, taille de base cv etre en fct de sont contenu en permettant un vraaai shrink*/
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  min-width: 0;
+}
+
+.avis-section > div:last-child{ /*JPERMET RIENNN PR derniere div -> laisser un avis*/
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 340px; /*ca fit mon ecran au pire jajuste guys*/
+}
+
+
+.avis-section .myform{
+  width: 100%;
+  max-width: 100%;
+}
+
+
+.avis-section .myform input{
+  width: 100%;
+  margin: 0 0 .75rem 0;
+}
+
+.avis-section .myform button{
+  width: 100%;
+  margin-top: .75rem;
+}
+
+#avis-list{
+  margin-top: 1rem;
+}
+
+#avis-list .comment, #avis-list .course-card{
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px){
+  .avis-section{
+    flex-direction: column;
+}
+  .avis-section > div:last-child{
+    flex-basis: auto; width: 100%;
+}
 }

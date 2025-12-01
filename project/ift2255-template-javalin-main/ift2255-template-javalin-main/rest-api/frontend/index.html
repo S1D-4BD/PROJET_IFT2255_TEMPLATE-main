@@ -15,9 +15,11 @@
     <div class="container">
         <h1>OUTIL DE CONSEILS PLANIFIUM</h1>
         <div class="student-info">
-            <h2><b>Espace de</b> <span id="student-name"></span></h2>
+
+            <!--= simple pr moi de load info en allant chercher par id et remplacer text-content-->
+            <h4><b>Espace de</b> <span id="student-name"></span></h4>
             <p><b>Matricule:</b> <span id="student-matricule"></span></p>
-            <p><b>Cours complétés:</b> <span id="completed-courses"></span></p>
+            <p><b>Cours complétés:</b><span id="completed-courses"></span></p>
             <button onclick="logout()">Déconnexion</button>
         </div>
         <section>
@@ -36,20 +38,35 @@
         </section>
 
         <section>
+            <h2>Comparaison 2 cours</h2>
+            <div>
+                <input type="text" id="compare-courseA" placeholder="Cours A (ex: IFT1015)">
+                <input type="text" id="compare-courseB" placeholder="Cours B (ex: IFT3700)">
+                <button onclick="compareCourses()">Comparer</button>
+            </div>
+            <div id="compare-result"></div>
+        </section>
+
+
+
         <h2>Avis form</h2>
+        <section class="avis-section">
+
 
             <div>
                 <h3>Consulter les avis</h3>
-                <input type="text" id="avis-search-coursebyid" placeholder="Ex: IFT1015">
-                <button onclick="loadAvis()">Voir les avis</button>
-                <button onclick="loadAvisStats()">Voir les stats</button>
-                <div id="avis-list"></div>
+                <div class="myform avis-form">
+                    <input type="text" id="avis-search-coursebyid" placeholder="Ex: IFT1015">
+                    <button onclick="loadAvis()">Voir les avis</button>
+                    <button onclick="loadAvisStats()">Voir les stats</button>
+                    <div id="avis-list"></div>
+                </div>
             </div>
 
-            <div style="margin-top: 20px;">
+            <div>
                 <h3>Laisser un avis</h3>
-                <form id="createAvisForm">
-                    <input type="text" id="avis-courseId" placeholder="Sigle (ex: IFT1015)" required>
+                <form id="createAvisForm" class="myform">
+                    <input type="text" id="avis-courseId" placeholder="Sigle (ABC1234)" required>
                     <input type="number" id="avis-rating" placeholder="Note (1-5)" min="1" max="5" required>
                     <input type="number" id="avis-difficulty" placeholder="Difficulté (1-5)" min="1" max="5" required>
                     <input type="number" id="avis-charge" placeholder="Charge (1-5)" min="1" max="5" required>
@@ -60,6 +77,8 @@
             </div>
         </section>
 
+
+        <!--
         <section>
             <h2>modifier une personne ??(juste tgde)</h2>
             <form id="createUserForm">
@@ -69,10 +88,11 @@
             </form>
         </section>
 
-
+        -->
     </div>
 
     <script>
+        //const API_URL = 'http://localhost:3000';
         const params = new URLSearchParams(window.location.search);
         const matricule = params.get('matricule');
 
@@ -93,7 +113,61 @@
         }
 
         loadStudent();
+
+
+        async function compareCourses() {
+            const courseA = document.getElementById('compare-courseA').value.trim().toUpperCase();
+            const courseB = document.getElementById('compare-courseB').value.trim().toUpperCase();
+
+            if (!courseA || !courseB) {
+                showError('compare-result', 'Veuillez entrer deux cours à comparer');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/compare?courseA=${courseA}&courseB=${courseB}`);
+
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la comparaison');
+                }
+
+                const result = await response.json();
+                displayComparison(result, courseA, courseB);
+            } catch (error) {
+                showError('compare-result', error.message);
+            }
+        }
+
+        function displayComparison(result, courseA, courseB) {
+            const container = document.getElementById('compare-result');
+
+            let best_cour = '';
+            if (result.avgRatingA > result.avgRatingB) {
+                best_cour = `${courseA} >  ${courseB}`;
+            } else if (result.avgRatingB > result.avgRatingA) {
+                best_cour = `${courseB} >  ${courseA}`;
+            } else {
+                best_cour = 'Les deux cours ont la mm note';
+            }
+
+            container.innerHTML = `
+                <div class="course-card">
+                    <h3>Comparaison: ${courseA} vs ${courseB}</h3>
+
+                    <p><b>Note moyenne ${courseA}:</b> ${result.avgRatingA}/5</p>
+                    <p><b>Note moyenne ${courseB}:</b> ${result.avgRatingB}/5</p>
+                    <p><b>Différence de notes:</b> ${result.reviewScoreDifference}</p>
+
+                    <p><b>Différence de crédits:</b> ${result.creditDifference}</p>
+
+                    <p><b>${best_cour}</b></p>
+                </div>
+            `;
+        }
+
     </script>
-        <script src="app.js"></script>
+
+    <script src="app.js"></script>
+
 </body>
 </html>

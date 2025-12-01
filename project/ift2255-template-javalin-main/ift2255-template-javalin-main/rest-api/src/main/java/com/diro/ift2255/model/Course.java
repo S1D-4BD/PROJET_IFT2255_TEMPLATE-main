@@ -13,7 +13,9 @@ public class Course {
     private String teacher;
     private List<String> sessions;
 
-    public Course() {}
+    public Course() {
+        
+    }
 
     public Course(String id, String name, String desc) {
         this.id = id;

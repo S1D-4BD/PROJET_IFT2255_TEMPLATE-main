@@ -138,7 +138,7 @@ function displayCourse(course) {
 }
 
 
-
+/*
 document.getElementById('createUserForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -166,7 +166,7 @@ document.getElementById('createUserForm').addEventListener('submit', async (e) =
     } catch (error) {
         showError('createUserForm', error.message);
     }
-});
+});*/
 
 
 function showError(containerId, message) {
@@ -265,6 +265,8 @@ function displayAvisStats(stats, courseId) {
 }
 
 document.getElementById('createAvisForm').addEventListener('submit', async (e) => {
+
+
     e.preventDefault();
 
     const avis = {
@@ -286,8 +288,15 @@ document.getElementById('createAvisForm').addEventListener('submit', async (e) =
             throw new Error('Erreur lors de la création');
         }
 
-        showSuccess('createAvisForm', 'Avis SUCCESS');
-        document.getElementById('createAvisForm').reset();
+
+        document.getElementById('avis-courseId').value = '';
+        document.getElementById('avis-rating').value = '';
+        document.getElementById('avis-difficulty').value = '';
+        document.getElementById('avis-charge').value = '';
+        document.getElementById('avis-comment').value = '';
+        //shit was annoying a chq fois reset me sort de la page en effacant uri tbrnk
+        document.getElementById('avis-form-result').innerHTML = '<div class="success">Avis enregistre</div>';
+        //document.getElementById('createAvisForm').reset();
     } catch (error) {
         showError('avis-form-result', error.message);
     }

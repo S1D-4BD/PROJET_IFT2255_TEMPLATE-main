@@ -1,156 +1,139 @@
-[
-  {
-    "courseId": "IFT1015",
-    "rating": 5,
-    "difficulty": 2,
-    "charge": 2,
-    "comment": "Excellent cours pour débuter en programmation! Le prof explique très bien"
-  },
-  {
-    "courseId": "IFT1015",
-    "rating": 4,
-    "difficulty": 3,
-    "charge": 3,
-    "comment": "Bon cours, mais les TPs prennent du temps"
-  },
-  {
-    "courseId": "IFT1015",
-    "rating": 3,
-    "difficulty": 3,
-    "charge": 4,
-    "comment": "Correct, mais j'aurais aimé plus d'exemples pratiques"
-  },
-  {
-    "courseId": "MAT1400",
-    "rating": 4,
-    "difficulty": 4,
-    "charge": 3,
-    "comment": "Calcul classique, bien enseigné, mais faut faire les exercices!"
-  },
-  {
-    "courseId": "MAT1400",
-    "rating": 2,
-    "difficulty": 5,
-    "charge": 4,
-    "comment": "Très difficile si t'as pas une bonne base en maths"
-  },
-  {
-    "courseId": "MAT1400",
-    "rating": 5,
-    "difficulty": 3,
-    "charge": 3,
-    "comment": "J'ai adoré! Le prof Bherer est excellent"
-  },
-  {
-    "courseId": "MAT1978",
-    "rating": 2,
-    "difficulty": 4,
-    "charge": 4,
-    "comment": "Cours dense mais intéressant, les probas c'est utile les amis"
-  },
-  {
-    "courseId": "MAT1978",
-    "rating": 1,
-    "difficulty": 5,
-    "charge": 5,
-    "comment": "Beaucoup trop de matière en peu de temps"
-  },
-  {
-    "courseId": "MAT1978",
-    "rating": 4,
-    "difficulty": 4,
-    "charge": 3,
-    "comment": "Challenging bref, je recommande pour ML!"
-  },
-  {
-    "courseId": "IFT2015",
-    "rating": 5,
-    "difficulty": 3,
-    "charge": 3,
-    "comment": "Super cours!"
-  },
-  {
-    "courseId": "IFT2015",
-    "rating": 4,
-    "difficulty": 4,
-    "charge": 4,
-    "comment": "Bon cours, les TP sont longs mais on apprend beaucoup"
-  },
-  {
-    "courseId": "IFT2015",
-    "rating": 3,
-    "difficulty": 4,
-    "charge": 4,
-    "comment": "Pas facile mais nécessaire pour la suite du bac"
-  },
-  {
-    "courseId": "IFT1575",
-    "rating": 4,
-    "difficulty": 3,
-    "charge": 3,
-    "comment": "Modèles intéressants, SURTOUT avec Margarida"
-  },
-  {
-    "courseId": "IFT1575",
-    "rating": 5,
-    "difficulty": 2,
-    "charge": 2,
-    "comment": "Très utile pour optimisation"
-  },
-  {
-    "courseId": "IFT1575",
-    "rating": 3,
-    "difficulty": 3,
-    "charge": 3,
-    "comment": "Correct, un peu ennuyant parfois"
-  },
-  {
-    "courseId": "IFT2255",
-    "rating": 4,
-    "difficulty": 3,
-    "charge": 4,
-    "comment": "Bon cours de génie logiciel, le projet est formateur"
-  },
-  {
-    "courseId": "IFT2255",
-    "rating": 5,
-    "difficulty": 3,
-    "charge": 4,
-    "comment": "Excellent!"
-  },
-  {
-    "courseId": "IFT2255",
-    "rating": 3,
-    "difficulty": 3,
-    "charge": 5,
-    "comment": "Le projet prend énormément de temps"
-  },
-  {
-    "courseId": "IFT3700",
-    "rating": 1,
-    "difficulty": 5,
-    "charge": 5,
-    "comment": "Vraiment nul comme cours, à éviter"
-  },
-  {
-    "courseId": "IFT3700",
-    "rating": 1,
-    "difficulty": 5,
-    "charge": 5,
-    "comment": "Le pire cours du bac. Incompréhensible. Nul. Voila"
-  },
-  {
-    "courseId": "IFT3700",
-    "rating": 2,
-    "difficulty": 5,
-    "charge": 5,
-    "comment": "Très difficile et mal organisé, bonne chance..."
-  },
-  {
-    "courseId": "IFT3700",
-    "rating": 1,
-    "difficulty": 5,
-    "charge": 5,
-    "comment": "À éviter à tout prix un vrai cours horrible"
-  }
-]
+[ {
+  "courseId" : "IFT1015",
+  "rating" : 5,
+  "difficulty" : 2,
+  "charge" : 2,
+  "comment" : "Excellent cours pour débuter en programmation! Le prof explique très bien"
+}, {
+  "courseId" : "IFT1015",
+  "rating" : 4,
+  "difficulty" : 3,
+  "charge" : 3,
+  "comment" : "Bon cours, mais les TPs prennent du temps"
+}, {
+  "courseId" : "IFT1015",
+  "rating" : 3,
+  "difficulty" : 3,
+  "charge" : 4,
+  "comment" : "Correct, mais j'aurais aimé plus d'exemples pratiques"
+}, {
+  "courseId" : "MAT1400",
+  "rating" : 4,
+  "difficulty" : 4,
+  "charge" : 3,
+  "comment" : "Calcul classique, bien enseigné, mais faut faire les exercices!"
+}, {
+  "courseId" : "MAT1400",
+  "rating" : 2,
+  "difficulty" : 5,
+  "charge" : 4,
+  "comment" : "Très difficile si t'as pas une bonne base en maths"
+}, {
+  "courseId" : "MAT1400",
+  "rating" : 5,
+  "difficulty" : 3,
+  "charge" : 3,
+  "comment" : "J'ai adoré! Le prof Bherer est excellent"
+}, {
+  "courseId" : "MAT1978",
+  "rating" : 2,
+  "difficulty" : 4,
+  "charge" : 4,
+  "comment" : "Cours dense mais intéressant, les probas c'est utile les amis"
+}, {
+  "courseId" : "MAT1978",
+  "rating" : 1,
+  "difficulty" : 5,
+  "charge" : 5,
+  "comment" : "Beaucoup trop de matière en peu de temps"
+}, {
+  "courseId" : "MAT1978",
+  "rating" : 4,
+  "difficulty" : 4,
+  "charge" : 3,
+  "comment" : "Challenging bref, je recommande pour ML!"
+}, {
+  "courseId" : "IFT2015",
+  "rating" : 5,
+  "difficulty" : 3,
+  "charge" : 3,
+  "comment" : "Super cours!"
+}, {
+  "courseId" : "IFT2015",
+  "rating" : 4,
+  "difficulty" : 4,
+  "charge" : 4,
+  "comment" : "Bon cours, les TP sont longs mais on apprend beaucoup"
+}, {
+  "courseId" : "IFT2015",
+  "rating" : 3,
+  "difficulty" : 4,
+  "charge" : 4,
+  "comment" : "Pas facile mais nécessaire pour la suite du bac"
+}, {
+  "courseId" : "IFT1575",
+  "rating" : 4,
+  "difficulty" : 3,
+  "charge" : 3,
+  "comment" : "Modèles intéressants, SURTOUT avec Margarida"
+}, {
+  "courseId" : "IFT1575",
+  "rating" : 5,
+  "difficulty" : 2,
+  "charge" : 2,
+  "comment" : "Très utile pour optimisation"
+}, {
+  "courseId" : "IFT1575",
+  "rating" : 3,
+  "difficulty" : 3,
+  "charge" : 3,
+  "comment" : "Correct, un peu ennuyant parfois"
+}, {
+  "courseId" : "IFT2255",
+  "rating" : 4,
+  "difficulty" : 3,
+  "charge" : 4,
+  "comment" : "Bon cours de génie logiciel, le projet est formateur"
+}, {
+  "courseId" : "IFT2255",
+  "rating" : 5,
+  "difficulty" : 3,
+  "charge" : 4,
+  "comment" : "Excellent!"
+}, {
+  "courseId" : "IFT2255",
+  "rating" : 3,
+  "difficulty" : 3,
+  "charge" : 5,
+  "comment" : "Le projet prend énormément de temps"
+}, {
+  "courseId" : "IFT3700",
+  "rating" : 1,
+  "difficulty" : 5,
+  "charge" : 5,
+  "comment" : "Vraiment nul comme cours, à éviter"
+}, {
+  "courseId" : "IFT3700",
+  "rating" : 1,
+  "difficulty" : 5,
+  "charge" : 5,
+  "comment" : "Le pire cours du bac. Incompréhensible. Nul. Voila"
+}, {
+  "courseId" : "IFT3700",
+  "rating" : 2,
+  "difficulty" : 5,
+  "charge" : 5,
+  "comment" : "Très difficile et mal organisé, bonne chance..."
+}, {
+  "courseId" : "IFT3700",
+  "rating" : 1,
+  "difficulty" : 5,
+  "charge" : 5,
+  "comment" : "À éviter à tout prix un vrai cours horrible"
+}, {
+  "courseId" : "MAT2015",
+  "rating" : 5,
+  "difficulty" : 1,
+  "charge" : 3,
+  "comment" : "Le meilleur des cours !!!!!"
+} ]
