@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public class ComparaisonTest {
    
-     //TEST: compareCredits(), tester la comparaison du nbr de credits entre deux cours 
+     //TEST: compareCredits(), tester la comparaison du nbr de credits entre deux cours (un dont les crédits ne sont pas définis)
     @Test
     void testCompareCredits_withNullAndNumericCredits() {
         //Arrange
