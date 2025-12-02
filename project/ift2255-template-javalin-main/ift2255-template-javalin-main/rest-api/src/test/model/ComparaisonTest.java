@@ -10,5 +10,29 @@ import org.junit.jupiter.api.Test;
 
 
 public class ComparaisonTest {
-    
+   
+     //TEST: compareCredits(), tester la comparaison du nbr de credits entre deux cours 
+    @Test
+    void testCompareCredits_withNullAndNumericCredits() {
+        //Arrange
+        Course courseA = new Course();
+        courseA.setId("IFT2035");
+
+        Course courseB = new Course() {
+            @Override
+            public String getCredits() {
+                return "3";
+            }
+        };
+        courseB.setId("IFT2000");
+
+        Comparaison comparaison = new Comparaison(courseA, courseB);
+
+        //Act
+        int diff = comparaison.compareCredits();
+        //Assert
+        assertEquals(3, diff,
+                "La différence de crédits entre 0 et 3 devrait être 3");
+    }
+
 }
