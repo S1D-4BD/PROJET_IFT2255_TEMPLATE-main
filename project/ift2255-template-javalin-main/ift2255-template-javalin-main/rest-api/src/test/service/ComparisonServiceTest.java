@@ -80,6 +80,7 @@ class ComparaisonServiceTest {
         verify(courseService).getCourseById(idA);
         verify(courseService).getCourseById(idB);
     }
+    
     @Test
     void testValidateCourses_whenBothCoursesExist() {
 
