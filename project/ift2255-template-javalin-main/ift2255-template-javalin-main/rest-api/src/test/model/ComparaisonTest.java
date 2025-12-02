@@ -36,7 +36,7 @@ public class ComparaisonTest {
     }
 
     
-     // TEST: getCommonSessions(), trouver l'intersection, donc les sessions communes dans lesquelles deux cours se donne
+     // TEST: getCommonSessions(), trouver l'intersection, donc la session commune dans laquelle deux cours se donne
     
 
     
