@@ -31,9 +31,22 @@ Assurez-vous d’avoir les outils suivants installés :
 - Entrer un matricule (ex : 20279666)
 - Tester
 
-  ![alt text](img_planifiumapp.png)
-
 ## Pour lancer les tests
 
 - Se déplacer jusqu'au répertoire `PROJET_IFT2255_TEMPLATE-main/project/ift2255-template-javalin-main/ift2255-template-javalin-main/rest-api`
-- Lancer mvn test 
+- Lancer mvn test
+
+---
+Images 
+
+  ![alt text](img/accueil.png)
+  
+  ![alt text](img/get_course.png)
+  
+  ![alt text](img/avis.png)
+  
+  ![alt text](img/get_course_withcmnt.png)
+  
+  ![alt text](img/compare_course.png)
+  
+  ![alt text](img/stats.png)
