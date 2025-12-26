@@ -2,6 +2,13 @@ const API_URL = 'http://localhost:3000';
 
 let coursAcademiques = {}; //on doit faire ca first sinn ca lag
 
+
+/**
+ * Charge les statistiques académiques des cours à partir d’un fichier CSV
+ * et les stocke dans la variable globale `coursAcademiques`.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function loadCSV() {
     const response = await fetch('../data/historique_cours_prog_117510.csv');
     const text = await response.text();
@@ -26,6 +33,13 @@ async function loadCSV() {
 }
 
 /////
+
+/**
+ * Charge la liste des étudiants depuis l’API
+ * et déclenche leur affichage.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function loadUsers() {
     try {
         const response = await fetch(`${API_URL}/students`);
