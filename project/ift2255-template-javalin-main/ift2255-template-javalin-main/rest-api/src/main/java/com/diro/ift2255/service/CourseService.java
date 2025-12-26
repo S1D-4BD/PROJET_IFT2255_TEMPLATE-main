@@ -63,4 +63,29 @@ public class CourseService {
         return getCourseById(courseIdA).isPresent()
             && getCourseById(courseIdB).isPresent();
     }
+
+    /////////////////////////////////
+    public List<Course> searchCourses(String sigle, String keyword) {
+
+        Map<String, String> params = new HashMap<>();
+
+        // Recherche par mot-clé dans le titre
+        if (keyword != null && !keyword.isBlank()) {
+            params.put("name", keyword.toLowerCase());
+        }
+
+        // Appel à Planifium
+        URI uri = HttpClientApi.buildUri(BASE_URL, params);
+        List<Course> courses = clientApi.get(uri, new TypeReference<List<Course>>() {});
+
+        // Filtrage par sigle partiel (ex: IFT)
+        if (sigle != null && !sigle.isBlank()) {
+            String sigleUpper = sigle.toUpperCase();
+            courses = courses.stream()
+                    .filter(c -> c.getId() != null && c.getId().startsWith(sigleUpper))
+                    .toList();
+        }
+
+        return courses;
+    }
 }

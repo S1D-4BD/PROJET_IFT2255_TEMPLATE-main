@@ -1,14 +1,16 @@
 package com.diro.ift2255.controller;
 
-import io.javalin.http.Context;
-import com.diro.ift2255.model.Course;
-import com.diro.ift2255.service.CourseService;
-import com.diro.ift2255.util.ResponseUtil;
-import com.diro.ift2255.util.HttpClientApi;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import com.diro.ift2255.model.Course;
+import com.diro.ift2255.service.CourseService;
+import com.diro.ift2255.util.HttpClientApi;
+import com.diro.ift2255.util.ResponseUtil;
+
+import io.javalin.http.Context;
 
 
 
@@ -87,4 +89,20 @@ public class CourseController {
 
         return queryParams;
     }
+
+    ////////////////////////
+    public void searchCourses(Context ctx) {
+
+        String sigle = ctx.queryParam("sigle");
+        String keyword = ctx.queryParam("keyword");
+
+        List<Course> courses = service.searchCourses(sigle, keyword);
+
+        if (courses.isEmpty()) {
+            ctx.status(404).json(Map.of("error", "Cours non trouvé"));
+        } else {
+            ctx.json(courses);
+        }
+    }
+
 }

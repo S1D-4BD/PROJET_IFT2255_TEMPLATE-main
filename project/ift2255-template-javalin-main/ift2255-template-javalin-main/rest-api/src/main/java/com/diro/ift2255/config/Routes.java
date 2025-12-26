@@ -36,16 +36,21 @@ public class Routes {
 */
 package com.diro.ift2255.config;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+ ////////////// pr comments now en test
+import java.util.Map;
+
+///
+import com.diro.ift2255.controller.AvisController;
+import com.diro.ift2255.controller.ComparaisonController;
 import com.diro.ift2255.controller.CourseController;
 import com.diro.ift2255.controller.StudentController;
-import com.diro.ift2255.controller.AvisController; ////////////// pr comments now en test
-import com.diro.ift2255.controller.ComparaisonController;///
 import com.diro.ift2255.service.CourseService;
 import com.diro.ift2255.util.HttpClientApi;
-import io.javalin.Javalin;
 
-import java.util.Map;
-import java.util.*;
+import io.javalin.Javalin;
 
 public class Routes {
 
@@ -74,6 +79,7 @@ public class Routes {
 
 
         app.get("/courses/{id}/full", courseController::getCourseWithSchedule);
+        app.get("/courses/search", courseController::searchCourses);
         app.get("/courses", courseController::getAllCourses);
 
 /*

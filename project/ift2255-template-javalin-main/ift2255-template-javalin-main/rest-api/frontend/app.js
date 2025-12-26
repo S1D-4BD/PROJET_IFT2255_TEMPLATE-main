@@ -34,7 +34,7 @@ function displayUsers(students) {
     `).join('');
 }
 
-async function loadCourse() {
+/**async function loadCourse() {
     const courseId = document.getElementById('courseId').value.trim();
 
     if (!courseId) {
@@ -55,7 +55,75 @@ async function loadCourse() {
     } catch (error) {
         showError('course-info', error.message);
     }
+}*/
+async function loadCourseExact() {
+    const courseId = document.getElementById('courseId').value.trim().toUpperCase();
+
+    if (!courseId) {
+        showError('course-info', 'Veuillez entrer un sigle de cours');
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_URL}/courses/${courseId}`);
+        if (!response.ok) throw new Error('Cours non trouvé');
+
+        const course = await response.json();
+        displayCourse(course);
+
+    } catch (error) {
+        showError('course-info', error.message);
+    }
 }
+
+async function loadCourseByKeyword() {
+    const query = document.getElementById('courseId').value.trim().toUpperCase();
+
+    if (!query) {
+        showError('course-info', 'Veuillez entrer un sigle ou un mot-clé');
+        return;
+    }
+
+    try {
+        // On récupère tous les cours et on filtre côté front
+        const response = await fetch(`${API_URL}/courses`);
+        if (!response.ok) throw new Error('Impossible de charger les cours');
+
+        const allCourses = await response.json();
+
+        const filteredCourses = allCourses.filter(c =>
+            c.id.toUpperCase().includes(query) ||
+            (c.name && c.name.toUpperCase().includes(query))
+        );
+
+        if (filteredCourses.length === 0) {
+            showError('course-info', 'Aucun cours trouvé');
+            return;
+        }
+
+        displayCourses(filteredCourses);
+
+    } catch (error) {
+        showError('course-info', error.message);
+    }
+}
+
+
+function displayCourses(courses) {
+    const container = document.getElementById('course-info');
+    container.innerHTML = "";
+
+    courses.forEach(course => {
+        container.innerHTML += `
+            <div class="course-card">
+                <h3>${course.id} - ${course.name}</h3>
+                <p><b>Crédits:</b> ${course.credits}</p>
+                <p>${course.description || ""}</p>
+            </div>
+        `;
+    });
+}
+
 
 function displayCourse(course) {
     const container = document.getElementById('course-info');
