@@ -56,6 +56,17 @@
             </div>
             <div id="compare-result"></div>
         </section>
+        <!-- Ajoute cette section où tu veux dans ton HTML -->
+        <section>
+            <h2>Conseiller ai de Planifume</h2>
+            <div id="chat-container">
+                <div id="chat-messages"></div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="Posez une question sur les cours...">
+                    <button onclick="sendMessage()">Envoyer</button>
+                </div>
+            </div>
+        </section>
 
 
 
@@ -174,6 +185,50 @@
                 </div>
             `;
         }
+
+//////la parite bonus chatbot///
+        const CHATBOT_URL = 'http://localhost:5000';
+
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            const messagesDiv = document.getElementById('chat-messages');
+            ///le msg du user
+            messagesDiv.innerHTML += `<div class="user-message"><b>Etudiant:</b> ${message}</div>`;
+            input.value = '';
+            messagesDiv.innerHTML += `<div class="bot-typing" id="typing">Botudem est en train d'écrire...</div>`;
+
+            try {
+                const response = await fetch(`${CHATBOT_URL}/chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: message,
+                        session_id: matricule || 'anonymous'
+                    })
+                });
+
+                const data = await response.json();
+
+                document.getElementById('typing')?.remove(); //quand le llm calcul une reponse on enleve le waiting state
+
+                messagesDiv.innerHTML += `<div class="bot-message"><b>Bot:</b> ${data.response}</div>`;
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            } catch (error) {
+                document.getElementById('typing')?.remove();
+                messagesDiv.innerHTML += `<div class="error">Erreur: le chatbot ne répond pas</div>`;
+            }
+        }
+
+        //le bouton pr send
+        document.getElementById('chat-input')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
 
     </script>
 
