@@ -15,12 +15,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.http.Context;
 
 public class CourseController {
+
     private final CourseService service;
 
     public CourseController(CourseService service) {
         this.service = service;
     }
-
 
     public void getAllCourses(Context ctx) {
         Map<String, String> queryParams = extractQueryParams(ctx);
@@ -28,23 +28,6 @@ public class CourseController {
         List<Course> courses = service.getAllCourses(queryParams);
         ctx.json(courses);
     }
-
-
-    /*public void getCourseById(Context ctx) {
-        String id = ctx.pathParam("id");
-
-        if (!validateCourseId(id)) {
-            ctx.status(400).json(ResponseUtil.formatError("Le paramètre id n'est pas valide."));
-            return;
-        }
-
-        Optional<Course> course = service.getCourseById(id);
-        if (course.isPresent()) {
-            ctx.json(course.get());
-        } else {
-            ctx.status(404).json(ResponseUtil.formatError("Aucun cours ne correspond à l'ID: " + id));
-        }
-    }*/
 
     public void getCourseById(Context ctx) {
         String id = ctx.pathParam("id");
@@ -95,19 +78,17 @@ public class CourseController {
 
     public void getCourseWithSchedule(Context ctx) {
         String id = ctx.pathParam("id");
-
-        // Uniformisation: accepte schedule_semester OU semester
         String semester = ctx.queryParam("schedule_semester");
+
         if (semester == null || semester.isBlank()) {
             semester = ctx.queryParam("semester");
         }
         if (semester == null || semester.isBlank()) {
-            semester = "A25"; // Valeur par défaut
+            semester = "A25"; //valeur par defaut
         }
 
         try {
-            String url = "https://planifium-api.onrender.com/api/v1/courses/" + id
-                       + "?include_schedule=true&schedule_semester=" + semester.toLowerCase();
+            String url = "https://planifium-api.onrender.com/api/v1/courses/" + id+ "?include_schedule=true&schedule_semester=" + semester.toLowerCase();
             var response = new HttpClientApi().get(java.net.URI.create(url));
             ctx.contentType("application/json").result(response.getBody());
         } catch (Exception e) {
@@ -128,8 +109,7 @@ public class CourseController {
         }
 
         try {
-            String url = "https://planifium-api.onrender.com/api/v1/courses/" + id
-                       + "?include_schedule=true&schedule_semester=" + semester.toLowerCase();
+            String url = "https://planifium-api.onrender.com/api/v1/courses/" + id+ "?include_schedule=true&schedule_semester=" + semester.toLowerCase();
             var response = new HttpClientApi().get(java.net.URI.create(url));
 
             ctx.contentType("application/json");
@@ -138,7 +118,6 @@ public class CourseController {
             ctx.status(500).json(Map.of("error", e.getMessage()));
         }
     }
-
 
     public void getCourseScheduleOnly(Context ctx) {
         String id = ctx.pathParam("id");
@@ -174,11 +153,9 @@ public class CourseController {
         }
     }
 
-
     private boolean validateCourseId(String courseId) {
         return courseId != null && courseId.trim().length() >= 6;
     }
-
 
     private Map<String, String> extractQueryParams(Context ctx) {
         Map<String, String> queryParams = new HashMap<>();

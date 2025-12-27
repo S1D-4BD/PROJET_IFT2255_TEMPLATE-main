@@ -19,18 +19,42 @@ public class Student {
         this.completedCourses = completedCourses;
     }
 
-    public String getMatricule() { return matricule; }
-    public void setMatricule(String matricule) { this.matricule = matricule; }
+    public String getMatricule() {
+        return matricule;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setMatricule(String matricule) {
+        this.matricule = matricule;
+    }
 
-    public String getProgram() { return program; }
-    public void setProgram(String program) { this.program = program; }
+    public String getName() {
+        return name;
+    }
+    q
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public String getCycle() { return cycle; }
-    public void setCycle(String cycle) { this.cycle = cycle; }
+    public String getProgram() {
+        return program;
+    }
 
-    public List<String> getCompletedCourses() { return completedCourses; }
-    public void setCompletedCourses(List<String> completedCourses) { this.completedCourses = completedCourses; }
+    public void setProgram(String program) {
+        this.program = program;
+    }
+
+    public String getCycle() {
+        return cycle;
+    }
+
+    public void setCycle(String cycle) {
+        this.cycle = cycle;
+    }
+
+    public List<String> getCompletedCourses() {
+        return completedCourses;
+    }
+    public void setCompletedCourses(List<String> completedCourses) {
+        this.completedCourses = completedCourses;
+    }
 }

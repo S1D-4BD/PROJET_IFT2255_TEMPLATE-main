@@ -1,15 +1,15 @@
-const API_URL = 'http://localhost:3000';
+    const API_URL = 'http://localhost:3000';
 
-let coursAcademiques = {}; //on doit faire ca first sinn ca lag
+    let coursAcademiques = {}; //on doit faire ca first sinn ca lag
 
 
-/**
- * Charge les statistiques académiques des cours à partir d’un fichier CSV
- * et les stocke dans la variable globale `coursAcademiques`.
- * @async
- * @returns {Promise<void>}
- */
-async function loadCSV() {
+    /**
+     * cette fct va charge les statistiques académiques des cours à partir d’un fichier CSV
+     * et les stocke dans la variable globale `coursAcademiques`
+     * @async
+     * @returns {Promise<void>}
+     */
+    async function loadCSV() {
     const response = await fetch('../data/historique_cours_prog_117510.csv');
     const text = await response.text();
 
@@ -30,17 +30,15 @@ async function loadCSV() {
             };
         }
     }
-}
+    }
 
-/////
 
-/**
- * Charge la liste des étudiants depuis l’API
- * et déclenche leur affichage
- * @async
- * @returns {Promise<void>}
- */
-async function loadUsers() {
+    /**
+     * ccette fct va charger la liste des étudiants depuis le service
+     * @async
+     * @returns {Promise<void>}
+     */
+    async function loadUsers() {
     try {
         const response = await fetch(`${API_URL}/students`);
 
@@ -53,14 +51,14 @@ async function loadUsers() {
     } catch (error) {
         showError('users-list', error.message);
     }
-}
+    }
 
 
-/**
- * Affiche la liste des étudiants dans l’interface
- * @param {Array<Object>} students ->Liste des étudiants
- */
-function displayUsers(students) {
+    /**
+     * va aficher la liste des étudiants dans l interface
+     * @param {Array<Object>} students --> la Liste des étudiants
+     */
+    function displayUsers(students) {
     const container = document.getElementById('users-list');
 
     if (students.length === 0) {
@@ -76,26 +74,24 @@ function displayUsers(students) {
             <p><b>Cours complétés:</b> ${student.completedCourses.join(', ')}</p>
         </div>
     `).join('');
-}
+    }
 
-/**
- * Genere le code de trimestre à partir des sélecteurs (par ex, A25)
- * @returns {string} Code du trimestre
- */
-function getSemesterCode() {
+    /**
+     * Genere le code de trimestre
+     * @returns {string} Code du trimestre
+     */
+    function getSemesterCode() {
     const term = document.getElementById("term")?.value || "a";
     const year = document.getElementById("year")?.value || "25";
     return `${term}${year}`;
-}
+    }
 
-/**
- * Determine le type de recherche de cours
- * -exacte (sigle complet)
- * -par mot clé
- * @async
- * @returns {Promise<void>}
- */
-async function searchCourse() {
+    /**
+     * Trouver un cours / des cours en fct du sigle ou sigle partiel
+     * @async
+     * @returns {Promise<void>}
+     */
+    async function searchCourse() {
     const input = document.getElementById("courseId").value.trim().toUpperCase();
 
     if (!input) {
@@ -109,15 +105,15 @@ async function searchCourse() {
     } else {
         loadCourseByKeyword(); //sinn fct hamza
     }
-}
+    }
 
-/**
- * Charge un cours précis pour un trimestre donné
- * et verifie l’éligibilité de l’etudiant
- * @async
- * @returns {Promise<void>}
- */
-async function loadCourse() {
+    /**
+     * Charge un cours pour un trimestre donné
+     * et verifie si on est éligible (etudiant)
+     * @async
+     * @returns {Promise<void>}
+     */
+    async function loadCourse() {
     const courseId = document.getElementById("courseId").value.trim();
     if (!courseId) {
         showError("course-info", "Veuillez entrer un sigle de cours");
@@ -141,9 +137,10 @@ async function loadCourse() {
     } catch (e) {
         showError("course-info", e.message);
     }
-}
+    }
 
-/*async function loadCourseExact() {
+
+    async function loadCourseExact() {
     const courseId = document.getElementById('courseId').value.trim().toUpperCase();
 
     if (!courseId) {
@@ -161,28 +158,9 @@ async function loadCourse() {
     } catch (error) {
         showError('course-info', error.message);
     }
-} */
-async function loadCourseExact() {
-    const courseId = document.getElementById('courseId').value.trim().toUpperCase();
-
-    if (!courseId) {
-        showError('course-info', 'Veuillez entrer un sigle de cours');
-        return;
     }
 
-    try {
-        const response = await fetch(`${API_URL}/courses/${courseId}`);
-        if (!response.ok) throw new Error('Cours non trouvé');
-
-        const course = await response.json();
-        displayCourse(course);
-
-    } catch (error) {
-        showError('course-info', error.message);
-    }
-}
-
-async function loadCourseByKeyword() {
+    async function loadCourseByKeyword() {
     const query = document.getElementById('courseId').value.trim().toUpperCase();
 
     if (!query) {
@@ -212,10 +190,10 @@ async function loadCourseByKeyword() {
     } catch (error) {
         showError('course-info', error.message);
     }
-}
+    }
 
 
-function displayCourse(course) {
+    function displayCourse(course) {
     const container = document.getElementById('course-info');
 
     let professors = [];
@@ -296,17 +274,17 @@ function displayCourse(course) {
             ${commentsHtml}
         </div>
     `;
-}
+    }
 
 
-/**
- * Affiche les informations détaillées d’un cours:
- * professeurs, prérequis, éligibilité, statistiques académiques
- * et commentaires étudiants
- * @param {Object} course Objet cours retourné par l’API
- */
+    /**
+     * Affiche les info en details dun cours:
+     * professeurs, prereqs, eligibility, stats académiques
+     * et avis étudiants
+     * @param {Object} course cours retourné par planifium
+     */
 
-function displayCourse(course) {
+    function displayCourse(course) {
     const container = document.getElementById('course-info');
 
     let professors = [];
@@ -387,15 +365,15 @@ function displayCourse(course) {
             ${commentsHtml}
         </div>
     `;
-}
+    }
 
-/**
- * Vérifie si l’etudiant connecté est eligible à un cours donné
- * @param {string} courseId - Sigle du cours
- * @returns {Promise<Object|null>} Resultat d’eligibilité ou null
- * git
- */
-async function checkEligibility(courseId) {
+    /**
+     * Vérifie si l’etudiant connecté est eligible à un cours donné
+     * @param {string} courseId - Sigle du cours
+     * @returns {Promise<Object|null>} Resultat d’eligibilité ou null
+     * git
+     */
+    async function checkEligibility(courseId) {
     console.log("checkEligibility appelé avec:", courseId, "matricule:", matricule);
 
     if (!matricule || !courseId) {
@@ -422,25 +400,25 @@ async function checkEligibility(courseId) {
         console.log("Erreur:", e);
         return null;
     }
-}
+    }
 
 
-/**
- * ERROR BOX, afficher une erreur au frontend
- * @param {string} containerId -ID du container ou afficher l'erreur
- * @param {string} message - le msg d'erreur
- */
-function showError(containerId, message) {
+    /**
+     * ERROR BOX, afficher une erreur au frontend
+     * @param {string} containerId -ID du container ou afficher l'erreur
+     * @param {string} message - le msg d'erreur
+     */
+    function showError(containerId, message) {
     const container = document.getElementById(containerId);
     container.innerHTML = `<div class="error">${message}</div>`;
-}
+    }
 
-/**
- * Affiche un message de succès temporaire
- * @param {string} elementId - L'ID de l'élément de référence
- * @param {string} message - Le message de succès
- */
-function showSuccess(elementId, message) {
+    /**
+     * Affiche un message de succès temporaire
+     * @param {string} elementId - L'ID de l'élément de référence
+     * @param {string} message - Le message de succès
+     */
+    function showSuccess(elementId, message) {
     const element = document.getElementById(elementId);
     const successDiv = document.createElement('div');
     successDiv.className = 'success';
@@ -448,14 +426,14 @@ function showSuccess(elementId, message) {
     element.parentNode.insertBefore(successDiv, element.nextSibling);
 
     setTimeout(() => successDiv.remove(), 3000);
-}
+    }
 
-///////////////////////AVIS LOGIC//////////
+    ///////////////////////AVIS LOGIC//////////
 
-/**
- * Charge les avis pour un cours spécifique
- */
-async function loadAvis() {
+    /**
+     * Charge les avis pour un cours spécifique
+     */
+    async function loadAvis() {
     const courseId = document.getElementById('avis-search-coursebyid').value.trim();
 
     if (!courseId) {
@@ -470,12 +448,12 @@ async function loadAvis() {
     } catch (error) {
         showError('avis-list', error.message);
     }
-}
+    }
 
-/**
- * Prepare stats a partir des avis pour un cours
- */
-async function loadAvisStats() {
+    /**
+     * Prepare stats a partir des avis pour un cours
+     */
+    async function loadAvisStats() {
     const courseId = document.getElementById('avis-search-coursebyid').value.trim();
 
     if (!courseId) {
@@ -490,13 +468,13 @@ async function loadAvisStats() {
     } catch (error) {
         showError('avis-list', error.message);
     }
-}
+    }
 
-/**
- * Affiche la list des avis
- * @param {Array} avisList - la list des avis
- */
-function displayAvis(avisList) {
+    /**
+     * Affiche la list des avis
+     * @param {Array} avisList - la list des avis
+     */
+    function displayAvis(avisList) {
     const container = document.getElementById('avis-list');
 
     if (avisList.length === 0) {
@@ -519,14 +497,14 @@ function displayAvis(avisList) {
         `;
         count++;
     }
-}
+    }
 
-/**
- * Affiche les stats des avis
- * @param {Object} stats - les stats quon calcule a chq souission d'avis
- * @param {string} courseId - le ID du cours en question
- */
-function displayAvisStats(stats, courseId) {
+    /**
+     * Affiche les stats des avis
+     * @param {Object} stats - les stats quon calcule a chq souission d'avis
+     * @param {string} courseId - le ID du cours en question
+     */
+    function displayAvisStats(stats, courseId) {
     const container = document.getElementById('avis-list');
 
     container.innerHTML = `
@@ -538,10 +516,10 @@ function displayAvisStats(stats, courseId) {
             <p><b>Charge moyenne:</b> ${stats.avg_charge}/5</p>
         </div>
     `;
-}
+    }
 
-//form pr les avis
-document.getElementById('createAvisForm').addEventListener('submit', async (e) => {
+    //form pr les avis
+    document.getElementById('createAvisForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const avis = {
@@ -574,9 +552,9 @@ document.getElementById('createAvisForm').addEventListener('submit', async (e) =
     } catch (error) {
         showError('avis-form-result', error.message);
     }
-});
+    });
 
-window.addEventListener('load', () => {
+    window.addEventListener('load', () => {
     //loadUsers();
     loadCSV();
-});
+    });

@@ -16,7 +16,6 @@ public class CourseService {
         this.clientApi = clientApi;
     }
 
-    /** Fetch all courses */
     public List<Course> getAllCourses(Map<String, String> queryParams) {
         Map<String, String> params = (queryParams == null) ? Collections.emptyMap() : queryParams;
 
@@ -26,12 +25,10 @@ public class CourseService {
         return courses;
     }
 
-    /** Fetch a course by ID */
     public Optional<Course> getCourseById(String courseId) {
         return getCourseById(courseId, null);
     }
 
-    /** Fetch a course by ID with optional query params */
     public Optional<Course> getCourseById(String courseId, Map<String, String> queryParams) {
         Map<String, String> params = (queryParams == null) ? Collections.emptyMap() : queryParams;
         URI uri = HttpClientApi.buildUri(BASE_URL + "/" + courseId, params);
@@ -68,16 +65,16 @@ public class CourseService {
 
         Map<String, String> params = new HashMap<>();
 
-        // Recherche par mot-clé dans le titre
+        // Recherche par keywors
         if (keyword != null && !keyword.isBlank()) {
             params.put("name", keyword.toLowerCase());
         }
 
-        // Appel à Planifium
+
         URI uri = HttpClientApi.buildUri(BASE_URL, params);
         List<Course> courses = clientApi.get(uri, new TypeReference<List<Course>>() {});
 
-        // Filtrage par sigle partiel (ex: IFT)
+        // filtrage ici
         if (sigle != null && !sigle.isBlank()) {
             String sigleUpper = sigle.toUpperCase();
             courses = courses.stream()

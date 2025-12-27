@@ -19,7 +19,7 @@ public class ProgramController {
 
         try {
             StringBuilder urlBuilder = new StringBuilder(BASE_URL);
-            urlBuilder.append("?programs_list=").append(programId);
+            urlBuilder.append("?programs_list=").append(programId); //j'utilise stringBuilder parce que vu que c'est du get, l'url va contenir les params quon utile -> + simple pour moi de build l'url en concatenant les params pour l'api
 
             String includeDetail = ctx.queryParam("include_courses_detail");
             if ("true".equalsIgnoreCase(includeDetail)) {

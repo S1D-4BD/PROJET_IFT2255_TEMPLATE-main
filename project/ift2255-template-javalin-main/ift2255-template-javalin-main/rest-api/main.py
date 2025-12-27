@@ -45,7 +45,7 @@ def get_cours_summary():
     return summary
 
 template = """
-Tu es un conseiller académique travaillant pour l'université de montréal, pour des étudiants.
+Tu es un conseiller académique travaillant pour l'université de montréal, pour des étudiants
 Tu aides les étudiants à choisir leurs cours pour leur faciliter au max la vie.
 
 Voici des données sur les cours:

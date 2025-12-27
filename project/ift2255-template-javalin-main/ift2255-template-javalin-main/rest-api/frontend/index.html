@@ -14,7 +14,7 @@
 <body>
     <div class="container">
         <h1>OUTIL DE CONSEILS PLANIFI
-            
+
 
             <!--= -->
             <!--= simple pr moi de load info en allant chercher par id et remplacer text-content-->
@@ -57,22 +57,10 @@
             </div>
             <div id="compare-result"></div>
         </section>
-        <!-- Ajoute cette section où tu veux dans ton HTML -->
-        <section>
-            <h2>Conseiller ai de Planifume</h2>
-            <div id="chat-container">
-                <div id="chat-messages"></div>
-                <div class="chat-input">
-                    <input type="text" id="chat-input" placeholder="Posez une question sur les cours...">
-                    <button onclick="sendMessage()">Envoyer</button>
-                </div>
-            </div>
-        </section>
-
-
 
         <h2>Avis form</h2>
         <section class="avis-section">
+
 
 
             <div>
@@ -111,6 +99,16 @@
         </section>
 
         -->
+        <section>
+            <h2>Conseiller ai de Planifume</h2>
+            <div id="chat-container">
+                <div id="chat-messages"></div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="Posez une question sur les cours...">
+                    <button onclick="sendMessage()">Envoyer</button>
+                </div>
+            </div>
+        </section>
     </div>
 
     <script>
@@ -137,26 +135,7 @@
 
         loadStudent()
 
-        const API_URL = 'http://localhost:3000';
 
-        async function searchCourse() {
-            const sigleOrId = document.getElementById('courseId').value.trim();
-            const term = document.getElementById('term').value;
-            const year = document.getElementById('year').value;
-
-            let sigle = sigleOrId.match(/^IFT/i) ? sigleOrId.toUpperCase() : '';
-            let keyword = sigleOrId && !sigle ? sigleOrId : '';
-
-            try {
-                const response = await fetch(`${API_URL}/courses/search?sigle=${sigle}&keyword=${keyword}`);
-                if (!response.ok) throw new Error("Cours non trouvé");
-                const courses = await response.json();
-
-                displayCourses(courses);
-            } catch (error) {
-                document.getElementById('course-info').innerHTML = `<p style="color:red">${error.message}</p>`;
-            }
-        }
 
         function displayCourses(courses) {
             const container = document.getElementById('course-info');
