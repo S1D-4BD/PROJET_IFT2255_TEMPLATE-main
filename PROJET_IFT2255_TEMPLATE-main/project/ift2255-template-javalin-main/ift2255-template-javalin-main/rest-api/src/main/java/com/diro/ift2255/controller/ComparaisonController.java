@@ -6,6 +6,10 @@ import com.diro.ift2255.util.ResponseUtil;
 
 import io.javalin.http.Context;
 
+/**
+ * Contrôleur responsable de la comparaison entre deux cours.
+ */
+
 public class ComparaisonController {
 
     private final CourseService service;

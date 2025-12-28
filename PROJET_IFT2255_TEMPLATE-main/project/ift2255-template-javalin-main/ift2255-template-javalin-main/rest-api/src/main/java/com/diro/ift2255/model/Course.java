@@ -3,6 +3,9 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * Représente un cours avec ses informations
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Course {
     private String id;

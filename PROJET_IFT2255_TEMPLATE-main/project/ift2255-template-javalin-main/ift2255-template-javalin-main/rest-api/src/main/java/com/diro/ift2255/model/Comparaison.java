@@ -1,8 +1,7 @@
 package com.diro.ift2255.model;
-import java.io.*;
-
-
-import com.diro.ift2255.service.AvisService;////
+import java.io.BufferedReader;
+import java.io.FileReader;
+////
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,9 +10,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.diro.ift2255.service.AvisService;
 
 
 
+/**
+ * Classe responsable de comparer deux cours selon plusieurs critère
+*/
 public class Comparaison {
     private final Course courseA;
     private final Course courseB;

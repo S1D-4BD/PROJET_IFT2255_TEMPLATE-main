@@ -1,10 +1,16 @@
 package com.diro.ift2255.controller;
 
-import io.javalin.http.Context;
-import com.diro.ift2255.util.HttpClientApi;
-import com.diro.ift2255.util.ResponseUtil;
 import java.util.Map;
 
+import com.diro.ift2255.util.HttpClientApi;
+import com.diro.ift2255.util.ResponseUtil;
+
+import io.javalin.http.Context;
+
+/**
+ * Contrôleur responsable de la récupération des cours associés à un programme.
+ * @param ctx
+ */ 
 public class ProgramController {
 
     private static final String BASE_URL = "https://planifium-api.onrender.com/api/v1/programs";

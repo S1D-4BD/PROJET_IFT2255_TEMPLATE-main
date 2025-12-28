@@ -1,9 +1,9 @@
 package com.diro.ift2255.model;
-import java.io.BufferedReader;
-import java.io.FileReader;
-
 import java.util.List;
 
+/**
+ * Représente un étudiant avec ses informations académiques principales 
+*/
 public class Student {
     private String matricule;
     private String name;

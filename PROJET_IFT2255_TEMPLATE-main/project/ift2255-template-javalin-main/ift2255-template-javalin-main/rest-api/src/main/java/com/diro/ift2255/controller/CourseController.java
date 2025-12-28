@@ -14,6 +14,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.javalin.http.Context;
 
+/**
+ * Contrôleur responsable des opérations liées aux cours.
+ */
 public class CourseController {
 
     private final CourseService service;
@@ -22,6 +25,10 @@ public class CourseController {
         this.service = service;
     }
 
+    /**
+     * Retourne tous les cours, avec possibilité de filtrer via les paramètres de requête.
+     * @param ctx
+     */
     public void getAllCourses(Context ctx) {
         Map<String, String> queryParams = extractQueryParams(ctx);
 
@@ -29,6 +36,10 @@ public class CourseController {
         ctx.json(courses);
     }
 
+    /**
+     * Retourne un cours selon son ID, avec possibilité d'inclure les horaires.
+     * @param ctx
+     */
     public void getCourseById(Context ctx) {
         String id = ctx.pathParam("id");
 
@@ -76,6 +87,10 @@ public class CourseController {
         ctx.json(response);
     }
 
+    /**
+     * Retourne un cours avec ses horaires pour une session donnée.
+     * @param ctx
+     */
     public void getCourseWithSchedule(Context ctx) {
         String id = ctx.pathParam("id");
         String semester = ctx.queryParam("schedule_semester");
@@ -96,6 +111,10 @@ public class CourseController {
         }
     }
 
+    /**
+     * Retourne toutes les informations d’un cours, incluant les horaires.
+     * @param ctx
+     */
     public void getCourseFull(Context ctx) {
         String id = ctx.pathParam("id");
 
@@ -119,6 +138,10 @@ public class CourseController {
         }
     }
 
+    /**
+     * Retourne uniquement les horaires d’un cours.
+     * @param ctx
+     */
     public void getCourseScheduleOnly(Context ctx) {
         String id = ctx.pathParam("id");
 
@@ -169,6 +192,9 @@ public class CourseController {
         return queryParams;
     }
 
+    /**
+     * Recherche des cours selon un sigle ou un mot-clé.
+     */
     public void searchCourses(Context ctx) {
 
         String sigle = ctx.queryParam("sigle");
@@ -183,6 +209,10 @@ public class CourseController {
         }
     }
 
+    /**
+     * Retourne les cours associés à un programme donné.
+     * @param ctx
+     */
     public void getCoursesByProgram(Context ctx) {
         String program = ctx.queryParam("program");
         boolean includeDetails = ctx.queryParam("include_details") != null && ctx.queryParam("include_details").equalsIgnoreCase("true");

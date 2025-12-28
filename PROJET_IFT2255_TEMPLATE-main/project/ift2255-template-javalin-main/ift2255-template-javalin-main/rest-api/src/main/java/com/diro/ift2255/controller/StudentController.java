@@ -1,10 +1,15 @@
 package com.diro.ift2255.controller;
 
-import io.javalin.http.Context;
-import com.diro.ift2255.service.StudentService;
+import java.util.List;
 import java.util.Map;
-import java.util.List; //pr eligibilite
 
+import com.diro.ift2255.service.StudentService;
+
+import io.javalin.http.Context; //pr eligibilite
+
+/**
+ * Contrôleur responsable de la gestion des opérations liées aux étudiants.
+ */
 public class StudentController {
     
     private StudentService service = new StudentService();
@@ -13,6 +18,10 @@ public class StudentController {
         ctx.json(service.getAll());
     }
 
+    /**
+     * Retourne un étudiant selon son matricule
+     * @param ctx
+     */
     public void getByMatricule(Context ctx) {
         String m = ctx.pathParam("matricule");
         var student = service.getByMatricule(m);
@@ -23,6 +32,10 @@ public class StudentController {
         }
     }
 
+    /**
+     * Vérifie si un étudiant est éligible à suivre un cours donné.
+     * @param ctx
+     */
     public void checkEligibility(Context ctx) {
         String matricule = ctx.pathParam("matricule");
         String courseId = ctx.queryParam("courseId");
