@@ -246,6 +246,56 @@ form {
     margin-right: 10px;
 }
 
+
+
+#horaire-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+#horaire-table th {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+#horaire-table td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: center;
+    font-size: 12px;
+}
+
+#horaire-table td:first-child {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    width: 60px;
+}
+
+#horaire-table tr:hover {
+    background-color: #f9f9f9; /*Jaime bien mettre le hover pk je peut voir ya quoi a la meme heure*/
+}
+
+
+#horaire-panier span {
+    display: inline-block;
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    margin: 3px;
+    border-radius: 15px;
+}
+
+#horaire-panier button {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
 @media (max-width: 900px){
   .avis-section{
     flex-direction: column;
