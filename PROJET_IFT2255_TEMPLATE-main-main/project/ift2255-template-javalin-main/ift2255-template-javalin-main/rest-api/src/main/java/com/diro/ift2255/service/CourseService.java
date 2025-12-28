@@ -63,18 +63,21 @@ public class CourseService {
 
     public List<Course> searchCourses(String sigle, String keyword) {
 
+        // Récupération de tous les cours depuis l'API
         Map<String, String> params = new HashMap<>();
-
-        // Recherche par keywors
-        if (keyword != null && !keyword.isBlank()) {
-            params.put("name", keyword.toLowerCase());
-        }
-
-
         URI uri = HttpClientApi.buildUri(BASE_URL, params);
         List<Course> courses = clientApi.get(uri, new TypeReference<List<Course>>() {});
 
-        // filtrage ici
+        // Filtrage par mot-clé (titre ou description)
+        if (keyword != null && !keyword.isBlank()) {
+            String lowerKeyword = keyword.toLowerCase();
+            courses = courses.stream()
+                    .filter(c -> (c.getName() != null && c.getName().toLowerCase().contains(lowerKeyword))
+                            || (c.getDescription() != null && c.getDescription().toLowerCase().contains(lowerKeyword)))
+                    .toList();
+        }
+
+        // Filtrage par sigle
         if (sigle != null && !sigle.isBlank()) {
             String sigleUpper = sigle.toUpperCase();
             courses = courses.stream()
@@ -84,6 +87,7 @@ public class CourseService {
 
         return courses;
     }
+
 
     public List<Course> getCoursesByProgram(String programCode, boolean includeDetails) {
         if (programCode == null || programCode.isBlank()) {

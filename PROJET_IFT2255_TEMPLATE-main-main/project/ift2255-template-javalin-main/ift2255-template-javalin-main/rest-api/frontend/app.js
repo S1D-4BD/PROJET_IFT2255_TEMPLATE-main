@@ -192,7 +192,6 @@
     }
     }
 
-
     function displayCourse(course) {
     const container = document.getElementById('course-info');
 
