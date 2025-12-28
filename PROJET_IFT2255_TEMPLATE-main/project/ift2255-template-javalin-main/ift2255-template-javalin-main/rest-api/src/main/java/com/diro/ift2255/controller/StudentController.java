@@ -20,7 +20,6 @@ public class StudentController {
 
     /**
      * Retourne un étudiant selon son matricule
-     * @param ctx
      */
     public void getByMatricule(Context ctx) {
         String m = ctx.pathParam("matricule");
@@ -34,7 +33,6 @@ public class StudentController {
 
     /**
      * Vérifie si un étudiant est éligible à suivre un cours donné.
-     * @param ctx
      */
     public void checkEligibility(Context ctx) {
         String matricule = ctx.pathParam("matricule");

@@ -9,7 +9,6 @@ import io.javalin.http.Context;
 
 /**
  * Contrôleur responsable de la récupération des cours associés à un programme.
- * @param ctx
  */ 
 public class ProgramController {
 

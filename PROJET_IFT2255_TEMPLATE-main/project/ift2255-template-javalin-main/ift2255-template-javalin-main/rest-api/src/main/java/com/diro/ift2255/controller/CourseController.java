@@ -27,7 +27,6 @@ public class CourseController {
 
     /**
      * Retourne tous les cours, avec possibilité de filtrer via les paramètres de requête.
-     * @param ctx
      */
     public void getAllCourses(Context ctx) {
         Map<String, String> queryParams = extractQueryParams(ctx);
@@ -38,7 +37,6 @@ public class CourseController {
 
     /**
      * Retourne un cours selon son ID, avec possibilité d'inclure les horaires.
-     * @param ctx
      */
     public void getCourseById(Context ctx) {
         String id = ctx.pathParam("id");
@@ -89,7 +87,6 @@ public class CourseController {
 
     /**
      * Retourne un cours avec ses horaires pour une session donnée.
-     * @param ctx
      */
     public void getCourseWithSchedule(Context ctx) {
         String id = ctx.pathParam("id");
@@ -113,7 +110,6 @@ public class CourseController {
 
     /**
      * Retourne toutes les informations d’un cours, incluant les horaires.
-     * @param ctx
      */
     public void getCourseFull(Context ctx) {
         String id = ctx.pathParam("id");
@@ -140,7 +136,6 @@ public class CourseController {
 
     /**
      * Retourne uniquement les horaires d’un cours.
-     * @param ctx
      */
     public void getCourseScheduleOnly(Context ctx) {
         String id = ctx.pathParam("id");
@@ -211,7 +206,6 @@ public class CourseController {
 
     /**
      * Retourne les cours associés à un programme donné.
-     * @param ctx
      */
     public void getCoursesByProgram(Context ctx) {
         String program = ctx.queryParam("program");

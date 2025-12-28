@@ -21,8 +21,6 @@ public class CourseService {
 
     /**
      * Récupère tous les cours, avec possibilité d'appliquer des paramètres de filtrage.
-     * @param queryParams
-     * @return
      */
     public List<Course> getAllCourses(Map<String, String> queryParams) {
         Map<String, String> params = (queryParams == null) ? Collections.emptyMap() : queryParams;
@@ -35,8 +33,6 @@ public class CourseService {
 
     /**
      * Récupère un cours selon son identifiant.
-     * @param courseId
-     * @return
      */
     public Optional<Course> getCourseById(String courseId) {
         return getCourseById(courseId, null);
@@ -44,9 +40,6 @@ public class CourseService {
 
     /**
      * Récupère un cours selon son identifiant, avec paramètres supplémentaires.
-     * @param courseId
-     * @param queryParams
-     * @return
      */
     public Optional<Course> getCourseById(String courseId, Map<String, String> queryParams) {
         Map<String, String> params = (queryParams == null) ? Collections.emptyMap() : queryParams;
@@ -62,9 +55,6 @@ public class CourseService {
 
     /**
      * Compare deux cours selon plusieurs critères (crédits, avis, sessions..)
-     * @param courseIdA
-     * @param courseIdB
-     * @return
      */
     public ComparaisonResult compareCourses(String courseIdA, String courseIdB) {
         Optional<Course> courseAOpt = getCourseById(courseIdA);
@@ -94,9 +84,6 @@ public class CourseService {
 
     /**
      * Recherche des cours selon un sigle ou un mot-clé.
-     * @param sigle
-     * @param keyword
-     * @return
      */
     public List<Course> searchCourses(String sigle, String keyword) {
 
@@ -127,9 +114,6 @@ public class CourseService {
 
     /**
      * Récupère les cours associés à un programme donné.
-     * @param programCode
-     * @param includeDetails
-     * @return
      */
     public List<Course> getCoursesByProgram(String programCode, boolean includeDetails) {
         if (programCode == null || programCode.isBlank()) {
