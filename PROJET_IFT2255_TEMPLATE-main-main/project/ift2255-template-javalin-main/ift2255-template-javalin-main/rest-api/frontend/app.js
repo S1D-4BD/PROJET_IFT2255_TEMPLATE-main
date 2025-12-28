@@ -167,6 +167,7 @@
         showError('course-info', 'Veuillez entrer un sigle ou un mot-clé');
         return;
     }
+    
 
     try {
         // On récupère tous les cours et on filtre côté front
