@@ -43,7 +43,8 @@
                     <option value="26">2026</option>
                     <option value="27">2027</option>
                 </select>
-                <button onclick="searchCourse()">Chercher</button>
+                <!-- <button onclick="searchCourse()">Chercher</button> -->
+                <button onclick="loadCourseByKeyword()">Chercher</button>
             </div>
             <div id="course-info"></div>
         </section>
@@ -99,6 +100,47 @@
         </section>
 
         -->
+
+
+
+        <section>
+            <h2>Section Horaire</h2>
+            <input type="text" id="horaire-courseId" placeholder="Ex: IFT1015">
+            <select id="horaire-term">
+                <option value="h">Hiver</option>
+                <option value="e">Été</option>
+                <option value="a" selected>Automne</option>
+            </select>
+            <select id="horaire-year">
+                <option value="25" selected>2025</option>
+                <option value="26">2026</option>
+            </select>
+            <button onclick="addToHoraire()">Ajouter</button>
+            <button onclick="clearHoraire()">Vider tout</button>
+
+            <h3>Panier (<span id="horaire-count">0</span>/6)</h3>
+            <div id="horaire-panier"></div>
+
+            <h3>Grille horaire</h3>
+            <table border="1" id="horaire-table">
+                <thead>
+                    <tr>
+                        <th>Heure</th>
+                        <th>Lundi</th>
+                        <th>Mardi</th>
+                        <th>Mercredi</th>
+                        <th>Jeudi</th>
+                        <th>Vendredi</th>
+                    </tr>
+                </thead>
+                <tbody id="horaire-body">
+                </tbody>
+            </table>
+        </section>
+<!----------------------------------------------------------->
+
+
+
         <section>
             <h2>Conseiller ai de Planifume</h2>
             <div id="chat-container">

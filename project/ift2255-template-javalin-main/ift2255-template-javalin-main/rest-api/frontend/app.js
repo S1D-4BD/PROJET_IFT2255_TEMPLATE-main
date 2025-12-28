@@ -555,7 +555,190 @@
     }
     });
 
+
+
+////////////////////////////////////////////////////////////////
+//horaire
+
+var couleurs = ['#FFB3BA', '#BAFFC9', '#BAE1FF', '#FFFFBA', '#FFDFBa', '#E0BBE4'];
+
+function getCouleur(courseId) {
+    var index = panier.indexOf(courseId);
+    return couleurs[index % couleurs.length]; // CYCLIQUE, INCASE ON PERMET D'AJOUTER  + DE COURS , maix 6 c normalement le max
+}
+
+var panier = [];
+var grille = {
+    'Lundi': {},
+    'Mardi': {},
+    'Mercredi': {},
+    'Jeudi': {},
+    'Vendredi': {}
+};
+
+async function addToHoraire() {
+    var courseId = document.getElementById('horaire-courseId').value.toUpperCase();
+
+    if (!courseId) {
+        alert('Entre un cours');
+        return;
+    }
+    if (panier.length >= 6) {
+        alert('Panier plein (max 6)');
+        return;
+    }
+    if (panier.includes(courseId)) {
+        alert('Cours deja dans le panier');
+        return;
+    }
+
+    panier.push(courseId);
+    document.getElementById('horaire-courseId').value = '';
+    await refreshHoraire(); // deja ce truc faut le load en demarrage de pag
+}
+
+function removeFromHoraire(courseId) {
+    panier = panier.filter(c => c !== courseId);
+    refreshHoraire();
+}
+
+function clearHoraire() {
+    panier = [];
+    refreshHoraire();
+}
+
+async function refreshHoraire() {
+    document.getElementById('horaire-count').textContent = panier.length;
+
+    var panierHtml = '';
+    for (var i = 0; i < panier.length; i++) {
+        panierHtml += '<span>' + panier[i] + ' <button onclick="removeFromHoraire(\'' + panier[i] + '\')">X</button></span> ';
+    }
+    document.getElementById('horaire-panier').innerHTML = panierHtml || '<p>Panier vide</p>';
+
+    grille = {
+        'Lundi': {},
+        'Mardi': {},
+        'Mercredi': {},
+        'Jeudi': {},
+        'Vendredi': {}
+    };
+
+    for (var i = 0; i < panier.length; i++) {
+        await loadCourseSchedule(panier[i]);
+    }
+
+    afficherGrille();
+}
+
+    async function loadCourseSchedule(courseId) {
+        try {
+
+            var term = document.getElementById('horaire-term').value;
+            var year = document.getElementById('horaire-year').value;
+            var semester = term + year;
+
+            var response = await fetch('http://localhost:3000/courses/' + courseId + '/full?semester=' + semester);
+            //var response = await fetch('http://localhost:3000/courses/' + courseId + '/full');
+            var data = await response.json();
+
+            var joursMap = {
+                'Lu': 'Lundi',
+                'Ma': 'Mardi',
+                'Me': 'Mercredi',
+                'Je': 'Jeudi',
+                'Ve': 'Vendredi'
+            };
+
+            if (!data.schedules || data.schedules.length === 0) return;
+
+            var schedule = data.schedules[0];
+            var section = schedule.sections[0];
+
+            for (var v = 0; v < section.volets.length; v++) {
+                var volet = section.volets[v];
+
+                if (volet.name !== 'TH' && volet.name !== 'TP') continue;
+
+                for (var a = 0; a < volet.activities.length; a++) {
+                    var activity = volet.activities[a];
+                    var debut = activity.start_time;
+                    var fin = activity.end_time;
+                    //permet de remplir tt les cases occupant la duree d un cours
+
+                    var cases = getCasesEntreHeures(debut, fin);
+
+                    for (var d = 0; d < activity.days.length; d++) {
+                        var jourAbr = activity.days[d];
+                        var jour = joursMap[jourAbr];
+
+                        if (jour && grille[jour]) {
+                            for (var c = 0; c < cases.length; c++) {
+                                if (grille[jour][cases[c]]) {
+                                    if (!grille[jour][cases[c]].includes(courseId)) { /// SI YA DEJA UN COURS, -> ALORS ON A LE CONLFIT
+                                        grille[jour][cases[c]] += ' / ' + courseId; //montrer les 2 cors en conflit
+                                    }
+                                } else {
+                                    grille[jour][cases[c]] = courseId;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (e) {
+            console.log('Erreur pour ' + courseId, e);
+        }
+    }
+
+    function getCasesEntreHeures(debut, fin) {
+        var heures = ['08:00', '08:30','09:00', '09:30','10:00', '10:30','11:00', '11:30','12:00', '12:30','13:00', '13:30','14:00', '14:30','15:00', '15:30','16:00', '16:30','17:00', '17:30','18:00', '18:30','19:00', '19:30','20:00', '20:30']; //on peut enlever ou ajouter incase, jme sie au centre etudiant
+
+        var result = [];
+        var started = false;
+
+        for (var i = 0; i < heures.length; i++) {
+            var h = heures[i];
+
+            if (h === debut) {
+                started = true;
+            }
+            if (started) {
+                result.push(h);
+            }
+
+            if (started && h >= fin) {
+                break;
+            }
+        }
+
+        return result;
+    }
+
+function afficherGrille() {
+    var heures = ['08:00', '08:30','09:00', '09:30','10:00', '10:30','11:00', '11:30','12:00', '12:30','13:00', '13:30','14:00', '14:30','15:00', '15:30','16:00', '16:30','17:00', '17:30','18:00', '18:30','19:00', '19:30','20:00', '20:30'];
+    var jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'];
+
+    var html = '';
+    for (var i = 0; i < heures.length; i++) {
+        html += '<tr><td>' + heures[i] + '</td>';
+        for (var j = 0; j < jours.length; j++) {
+            var cours = grille[jours[j]][heures[i]] || '';
+            if (cours) {
+                html += '<td style="background-color:' + getCouleur(cours) + '">' + cours + '</td>';
+            } else {
+                html += '<td></td>';
+            }
+        }
+        html += '</tr>';
+    }
+
+    document.getElementById('horaire-body').innerHTML = html;
+}
+
+
     window.addEventListener('load', () => {
     //loadUsers();
     loadCSV();
+    refreshHoraire();
     });

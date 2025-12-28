@@ -1,0 +1,769 @@
+{
+  "id": "MAT1400",
+  "name": "Calcul 1",
+  "credits": 4,
+  "description": "Suites, séries. Fonctions de plusieurs variables, continuité, dérivées partielles, différentielles, plan tangent, dérivation en chaîne. Gradient, surfaces de niveau, extremums. Intégrales multiples, changement de variables, jacobien.",
+  "available_terms": {
+    "autumn": true,
+    "winter": true,
+    "summer": false
+  },
+  "available_periods": {
+    "daytime": true,
+    "evening": false
+  },
+  "schedules": [
+    {
+      "_id": "A25MAT1400",
+      "sigle": "MAT1400",
+      "name": "Calcul 1",
+      "semester": "A25",
+      "sections": [
+        {
+          "number_inscription": "222",
+          "teachers": [
+            "Margalef Bentabol ,Juan"
+          ],
+          "capacity": "222",
+          "volets": [
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Ma"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "10:29",
+                  "start_date": "2025-09-02",
+                  "end_date": "2025-10-17",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-0215",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Ma"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "10:29",
+                  "start_date": "2025-10-28",
+                  "end_date": "2025-12-09",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-0215",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Je"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "10:29",
+                  "start_date": "2025-09-02",
+                  "end_date": "2025-09-26",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "Roger-Gaudry (B)",
+                  "room": "P-310",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Je"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "10:29",
+                  "start_date": "2025-10-28",
+                  "end_date": "2025-12-05",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-0325",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Je"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "10:29",
+                  "start_date": "2025-09-29",
+                  "end_date": "2025-10-03",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-0215",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Je"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "10:29",
+                  "start_date": "2025-10-06",
+                  "end_date": "2025-10-17",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "Roger-Gaudry (B)",
+                  "room": "P-310",
+                  "mode": "P"
+                }
+              ],
+              "name": "TH"
+            },
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-10-27",
+                  "end_date": "2025-10-27",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "Roger-Gaudry (A)",
+                  "room": "E-310_511A",
+                  "mode": "P"
+                }
+              ],
+              "name": "Intra"
+            },
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Je"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "11:29",
+                  "start_date": "2025-12-18",
+                  "end_date": "2025-12-18",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "Roger-Gaudry (B)",
+                  "room": "N-515",
+                  "mode": "P"
+                }
+              ],
+              "name": "Final"
+            }
+          ],
+          "name": "A"
+        },
+        {
+          "number_inscription": "74",
+          "teachers": [],
+          "capacity": "74",
+          "volets": [
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-09-08",
+                  "end_date": "2025-10-10",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-4240",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-11-03",
+                  "end_date": "2025-12-09",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-4240",
+                  "mode": "P"
+                }
+              ],
+              "name": "TP"
+            }
+          ],
+          "name": "A101"
+        },
+        {
+          "number_inscription": "74",
+          "teachers": [],
+          "capacity": "74",
+          "volets": [
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-09-08",
+                  "end_date": "2025-10-10",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-3245",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-11-03",
+                  "end_date": "2025-12-09",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-3245",
+                  "mode": "P"
+                }
+              ],
+              "name": "TP"
+            }
+          ],
+          "name": "A102"
+        },
+        {
+          "number_inscription": "74",
+          "teachers": [],
+          "capacity": "74",
+          "volets": [
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-09-08",
+                  "end_date": "2025-10-10",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-3275",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-11-03",
+                  "end_date": "2025-12-09",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-3275",
+                  "mode": "P"
+                }
+              ],
+              "name": "TP"
+            }
+          ],
+          "name": "A103"
+        },
+        {
+          "number_inscription": "195",
+          "teachers": [
+            "Phung ,Xuan Kien"
+          ],
+          "capacity": "200",
+          "volets": [
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Ma"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "10:29",
+                  "start_date": "2025-09-02",
+                  "end_date": "2025-10-17",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-2325",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Ma"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "10:29",
+                  "start_date": "2025-10-28",
+                  "end_date": "2025-12-09",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-2325",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Je"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "10:29",
+                  "start_date": "2025-09-02",
+                  "end_date": "2025-10-17",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-2325",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Je"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "10:29",
+                  "start_date": "2025-10-28",
+                  "end_date": "2025-12-05",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-2325",
+                  "mode": "P"
+                }
+              ],
+              "name": "TH"
+            },
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-10-27",
+                  "end_date": "2025-10-27",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-2285",
+                  "mode": "P"
+                }
+              ],
+              "name": "Intra"
+            },
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Je"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "11:29",
+                  "start_date": "2025-12-18",
+                  "end_date": "2025-12-18",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-2325",
+                  "mode": "P"
+                }
+              ],
+              "name": "Final"
+            }
+          ],
+          "name": "B"
+        },
+        {
+          "number_inscription": "70",
+          "teachers": [],
+          "capacity": "70",
+          "volets": [
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-09-08",
+                  "end_date": "2025-10-10",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-3295",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-11-03",
+                  "end_date": "2025-12-09",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-3295",
+                  "mode": "P"
+                }
+              ],
+              "name": "TP"
+            }
+          ],
+          "name": "B101"
+        },
+        {
+          "number_inscription": "71",
+          "teachers": [],
+          "capacity": "70",
+          "volets": [
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-09-08",
+                  "end_date": "2025-10-10",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-4285",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-11-03",
+                  "end_date": "2025-12-09",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-4285",
+                  "mode": "P"
+                }
+              ],
+              "name": "TP"
+            }
+          ],
+          "name": "B102"
+        },
+        {
+          "number_inscription": "54",
+          "teachers": [],
+          "capacity": "70",
+          "volets": [
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-09-08",
+                  "end_date": "2025-10-10",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-3260",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-11-03",
+                  "end_date": "2025-12-09",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-3260",
+                  "mode": "P"
+                }
+              ],
+              "name": "TP"
+            }
+          ],
+          "name": "B103"
+        },
+        {
+          "number_inscription": "96",
+          "teachers": [
+            "Ben Salah,Zied"
+          ],
+          "capacity": "250",
+          "volets": [
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Ma"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "10:29",
+                  "start_date": "2025-09-09",
+                  "end_date": "2025-10-17",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-3335",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Ma"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "10:29",
+                  "start_date": "2025-10-28",
+                  "end_date": "2025-12-09",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-3335",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Je"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "10:29",
+                  "start_date": "2025-09-02",
+                  "end_date": "2025-10-17",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-0325",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Je"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "10:29",
+                  "start_date": "2025-10-28",
+                  "end_date": "2025-12-05",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "André-Aisenstadt",
+                  "room": "1140",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Ma"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "10:29",
+                  "start_date": "2025-09-02",
+                  "end_date": "2025-09-02",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "Aménagement",
+                  "room": "0030",
+                  "mode": "P"
+                }
+              ],
+              "name": "TH"
+            },
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-10-27",
+                  "end_date": "2025-10-27",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-0215",
+                  "mode": "P"
+                }
+              ],
+              "name": "Intra"
+            },
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Me"
+                  ],
+                  "start_time": "08:30",
+                  "end_time": "11:29",
+                  "start_date": "2025-12-17",
+                  "end_date": "2025-12-17",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "Marie-Victorin (C)",
+                  "room": "D-550",
+                  "mode": "P"
+                }
+              ],
+              "name": "Final"
+            }
+          ],
+          "name": "I"
+        },
+        {
+          "number_inscription": "55",
+          "teachers": [],
+          "capacity": "85",
+          "volets": [
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-09-08",
+                  "end_date": "2025-10-10",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-2325",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-10-28",
+                  "end_date": "2025-12-05",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-2325",
+                  "mode": "P"
+                }
+              ],
+              "name": "TP"
+            }
+          ],
+          "name": "I101"
+        },
+        {
+          "number_inscription": "34",
+          "teachers": [],
+          "capacity": "85",
+          "volets": [
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-09-08",
+                  "end_date": "2025-10-10",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-0215",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-10-28",
+                  "end_date": "2025-12-05",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-0215",
+                  "mode": "P"
+                }
+              ],
+              "name": "TP"
+            }
+          ],
+          "name": "I102"
+        },
+        {
+          "number_inscription": "7",
+          "teachers": [],
+          "capacity": "85",
+          "volets": [
+            {
+              "activities": [
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-09-08",
+                  "end_date": "2025-10-10",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-0245",
+                  "mode": "P"
+                },
+                {
+                  "days": [
+                    "Lu"
+                  ],
+                  "start_time": "15:30",
+                  "end_time": "17:29",
+                  "start_date": "2025-10-28",
+                  "end_date": "2025-12-05",
+                  "campus": "Montréal",
+                  "place": "Montréal",
+                  "pavillon_name": "3200 Jean-Brillant",
+                  "room": "B-0245",
+                  "mode": "P"
+                }
+              ],
+              "name": "TP"
+            }
+          ],
+          "name": "I103"
+        }
+      ],
+      "fetch_date": "2025-09-05",
+      "semester_int": 253
+    }
+  ],
+  "requirement_text": "",
+  "equivalent_courses": [],
+  "prerequisite_courses": [],
+  "concomitant_courses": []
+}

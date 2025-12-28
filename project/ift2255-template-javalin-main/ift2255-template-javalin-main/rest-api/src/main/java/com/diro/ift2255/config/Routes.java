@@ -87,7 +87,7 @@ public class Routes {
         app.get("/courses", courseController::getAllCourses);
         app.get("/courses/search", courseController::searchCourses);
         app.get("/courses/{id}", courseController::getCourseById);
-        
+
     }
 
     private static void registerCommentRoutes(Javalin app) {
