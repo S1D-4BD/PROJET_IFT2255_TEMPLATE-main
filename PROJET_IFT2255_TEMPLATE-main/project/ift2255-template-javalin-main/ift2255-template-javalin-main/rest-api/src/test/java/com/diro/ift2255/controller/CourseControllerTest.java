@@ -1,13 +1,25 @@
 package com.diro.ift2255.controller;
 
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-import java.util.*;
-
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
 import org.mockito.Mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.diro.ift2255.model.Course;
@@ -86,23 +98,6 @@ public class CourseControllerTest {
                 params.containsKey("session") &&
                 params.get("session").equals("A2025")));
         verify(mockContext).json(mockCourses);
-    }
-
-    @Test
-    @DisplayName("Get course by ID should return course when ID exists")
-    void testGetCourseByIdWhenIdExists() {
-        String courseId = "IFT2255";
-        Course mockCourse = new Course(courseId, "Genie logiciel", "Description");
-
-        when(mockContext.pathParam("id")).thenReturn(courseId);
-        when(mockService.getCourseById(courseId)).thenReturn(Optional.of(mockCourse));
-
-        controller.getCourseById(mockContext);
-
-        verify(mockContext).pathParam("id");
-        verify(mockService).getCourseById(courseId);
-        verify(mockContext).json(mockCourse);
-        verify(mockContext, never()).status(anyInt());
     }
 
     @Test

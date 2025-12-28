@@ -44,8 +44,8 @@ class StudentServiceTest {
 
         List<Student> students = service.getAll();
 
-        // On sait qu’il y a 3 étudiants dans le constructeur
-        assertEquals(3, students.size(), "Il devrait y avoir 3 étudiants");
+        // On sait qu’il y a maintenant 4 étudiants dans le constructeur
+        assertEquals(4, students.size(), "Il devrait y avoir 4 étudiants");
     }
 
     // Test pour vérifier l’éligibilité quand toutes les conditions sont remplies
@@ -55,7 +55,7 @@ class StudentServiceTest {
         Student aya = service.getByMatricule("20280089").get();
 
         List<String> prereq = Arrays.asList("IFT1015", "IFT1005");
-        boolean eligible = service.isEligible(aya, prereq);
+        boolean eligible = service.isEligible(aya, prereq, "A2025");
 
         assertTrue(eligible, "Aya a bien complété les prérequis");
     }
@@ -67,7 +67,7 @@ class StudentServiceTest {
         Student gabriel = service.getByMatricule("20283304").get();
 
         List<String> prereq = Arrays.asList("IFT3355"); // Gabriel ne l’a pas
-        boolean eligible = service.isEligible(gabriel, prereq);
+        boolean eligible = service.isEligible(gabriel, prereq, "A2025");
 
         assertFalse(eligible, "Gabriel ne devrait pas être éligible");
     }
@@ -78,13 +78,32 @@ class StudentServiceTest {
         Student celina = service.getByMatricule("20279666").get();
 
         List<String> prereq = Collections.emptyList();
-        boolean eligible = service.isEligible(celina, prereq);
+        boolean eligible = service.isEligible(celina, prereq, "A2025");
 
         assertTrue(eligible, "Sans prérequis, tout le monde est éligible");
     }
+
+    // Test pour vérifier quand les prérequis sont partiellement remplis
+    @Test
+    void testIsEligible_partialPrerequisites() {
+        StudentService service = new StudentService();
+        Student gabriel = service.getByMatricule("20283304").get();
+
+        List<String> prereq = Arrays.asList("IFT1005", "IFT3355"); // Gabriel n'a que IFT1005
+        boolean eligible = service.isEligible(gabriel, prereq, "A2025");
+
+        assertFalse(eligible, "Gabriel ne devrait pas être éligible car tous les prérequis ne sont pas remplis");
+    }
+
+    @Test
+    void testIsEligible_emptyPrerequisitesList() {
+        StudentService service = new StudentService();
+        Student gabriel = service.getByMatricule("20283304").get();
+
+        List<String> prereq = Collections.emptyList(); // pas de prérequis
+        boolean eligible = service.isEligible(gabriel, prereq, "A2025");
+
+        assertTrue(eligible, "Gabriel est éligible car aucun prérequis n’est demandé");
+    }
+
 }
-
-
-
-
-

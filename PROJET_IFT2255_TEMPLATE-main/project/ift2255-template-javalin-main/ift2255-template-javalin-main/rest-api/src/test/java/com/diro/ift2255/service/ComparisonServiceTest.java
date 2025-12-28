@@ -1,17 +1,22 @@
 package com.diro.ift2255.service;
 
-import com.diro.ift2255.model.ComparaisonResult;
-import com.diro.ift2255.model.Course;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import com.diro.ift2255.model.ComparaisonResult;
+import com.diro.ift2255.model.Course;
 
 @ExtendWith(MockitoExtension.class)
 class ComparaisonServiceTest {
@@ -81,6 +86,32 @@ class ComparaisonServiceTest {
         assertTrue(result, "Les deux cours existent, on s'attend a true");
     }
 
+    @Test
+    void testCompareCourses_whenBothCoursesDontExist() {
+        when(courseService.getCourseById("A")).thenReturn(Optional.empty());
+        when(courseService.getCourseById("B")).thenReturn(Optional.empty());
 
+        IllegalArgumentException ex = assertThrows(
+                IllegalArgumentException.class,
+                () -> comparaisonService.compareCourses("A", "B")
+        );
 
+        assertTrue(ex.getMessage().contains("introuvables"));
+
+        verify(courseService).getCourseById("A");
+        verify(courseService).getCourseById("B");
+    }
+
+    @Test
+    void testValidateCourses_whenOneCourseDoesNotExist() {
+        when(courseService.getCourseById("A")).thenReturn(Optional.of(mock(Course.class)));
+        when(courseService.getCourseById("B")).thenReturn(Optional.empty());
+
+        boolean result = comparaisonService.validateCourses("A", "B");
+
+        assertFalse(result);
+
+        verify(courseService).getCourseById("A");
+        verify(courseService).getCourseById("B");
+    }
 }

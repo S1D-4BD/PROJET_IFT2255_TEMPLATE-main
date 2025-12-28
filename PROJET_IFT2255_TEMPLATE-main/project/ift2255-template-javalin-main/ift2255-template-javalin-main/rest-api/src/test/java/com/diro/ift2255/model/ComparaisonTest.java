@@ -1,11 +1,11 @@
 package com.diro.ift2255.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 
@@ -73,5 +73,37 @@ public class ComparaisonTest {
         assertEquals(2, missingForB.size(), "Il devrait manquer 2 prerequis au cours B");
         assertTrue(missingForB.contains("IFT2015") || missingForB.contains("MAT1978"),
                 "Pour B, il devrait manquer les prerequis de A : IFT2015 et MAT1978");
+    }
+
+    @Test
+    void testGetCommonSessions_noCommonSession() {
+        Course courseA = new Course();
+        courseA.setId("IFT2255");
+        courseA.setSessions(Arrays.asList("H25"));
+
+        Course courseB = new Course();
+        courseB.setId("IFT2015");
+        courseB.setSessions(Arrays.asList("A24"));
+
+        Comparaison comparaison = new Comparaison(courseA, courseB);
+
+        List<String> common = comparaison.getCommonSessions();
+
+        assertTrue(common.isEmpty());
+    }
+
+    @Test
+    void testCompareCredits_bothNullCredits() {
+        Course courseA = new Course();
+        courseA.setId("IFT2255");
+
+        Course courseB = new Course();
+        courseB.setId("IFT2015");
+
+        Comparaison comparaison = new Comparaison(courseA, courseB);
+
+        int diff = comparaison.compareCredits();
+
+        assertEquals(0, diff);
     }
 }

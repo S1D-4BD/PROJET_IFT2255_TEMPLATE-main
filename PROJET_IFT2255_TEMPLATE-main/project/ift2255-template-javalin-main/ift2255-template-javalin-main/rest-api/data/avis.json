@@ -196,4 +196,196 @@
   "difficulty" : 4,
   "charge" : 2,
   "comment" : "C'est très mathémaique pour un cours d'info"
+}, {
+  "difficulty" : 1,
+  "charge" : 1,
+  "rating" : 5,
+  "comment" : "Super cours!",
+  "courseId" : "UNIQUE_1766939148379"
+}, {
+  "courseId" : "IFT1234"
+}, {
+  "difficulty" : 3,
+  "charge" : 2,
+  "rating" : 4,
+  "comment" : "Test comment",
+  "courseId" : "TEST1234"
+}, {
+  "rating" : 4,
+  "courseId" : "IFT2015"
+}, {
+  "rating" : 2,
+  "courseId" : "IFT2015"
+}, {
+  "difficulty" : 2,
+  "charge" : 1,
+  "rating" : 5,
+  "courseId" : "iFt5000"
+}, {
+  "rating" : 4,
+  "courseId" : "IFT7000"
+}, {
+  "rating" : 4,
+  "comment" : "Champs manquants",
+  "courseId" : "IFT9000"
+}, {
+  "difficulty" : 1,
+  "charge" : 1,
+  "rating" : 5,
+  "comment" : "Super cours!",
+  "courseId" : "UNIQUE_1766939187517"
+}, {
+  "courseId" : "IFT1234"
+}, {
+  "difficulty" : 3,
+  "charge" : 2,
+  "rating" : 4,
+  "comment" : "Test comment",
+  "courseId" : "TEST1234"
+}, {
+  "rating" : 4,
+  "courseId" : "IFT2015"
+}, {
+  "rating" : 2,
+  "courseId" : "IFT2015"
+}, {
+  "difficulty" : 2,
+  "charge" : 1,
+  "rating" : 5,
+  "courseId" : "iFt5000"
+}, {
+  "rating" : 4,
+  "courseId" : "IFT7000"
+}, {
+  "rating" : 4,
+  "comment" : "Champs manquants",
+  "courseId" : "IFT9000"
+}, {
+  "difficulty" : 1,
+  "charge" : 1,
+  "rating" : 5,
+  "comment" : "Super cours!",
+  "courseId" : "UNIQUE_1766940653138"
+}, {
+  "courseId" : "IFT1234"
+}, {
+  "difficulty" : 3,
+  "charge" : 2,
+  "rating" : 4,
+  "comment" : "Test comment",
+  "courseId" : "TEST1234"
+}, {
+  "rating" : 4,
+  "courseId" : "IFT2015"
+}, {
+  "rating" : 2,
+  "courseId" : "IFT2015"
+}, {
+  "difficulty" : 2,
+  "charge" : 1,
+  "rating" : 5,
+  "courseId" : "iFt5000"
+}, {
+  "rating" : 4,
+  "courseId" : "IFT7000"
+}, {
+  "rating" : 4,
+  "comment" : "Champs manquants",
+  "courseId" : "IFT9000"
+}, {
+  "difficulty" : 1,
+  "charge" : 1,
+  "rating" : 5,
+  "comment" : "Super cours!",
+  "courseId" : "UNIQUE_1766940991886"
+}, {
+  "courseId" : "IFT1234"
+}, {
+  "difficulty" : 3,
+  "charge" : 2,
+  "rating" : 4,
+  "comment" : "Test comment",
+  "courseId" : "TEST1234"
+}, {
+  "rating" : 4,
+  "courseId" : "IFT2015"
+}, {
+  "rating" : 2,
+  "courseId" : "IFT2015"
+}, {
+  "difficulty" : 2,
+  "charge" : 1,
+  "rating" : 5,
+  "courseId" : "iFt5000"
+}, {
+  "rating" : 4,
+  "courseId" : "IFT7000"
+}, {
+  "rating" : 4,
+  "comment" : "Champs manquants",
+  "courseId" : "IFT9000"
+}, {
+  "difficulty" : 1,
+  "charge" : 1,
+  "rating" : 5,
+  "comment" : "Super cours!",
+  "courseId" : "UNIQUE_1766941667763"
+}, {
+  "courseId" : "IFT1234"
+}, {
+  "difficulty" : 3,
+  "charge" : 2,
+  "rating" : 4,
+  "comment" : "Test comment",
+  "courseId" : "TEST1234"
+}, {
+  "rating" : 4,
+  "courseId" : "IFT2015"
+}, {
+  "rating" : 2,
+  "courseId" : "IFT2015"
+}, {
+  "difficulty" : 2,
+  "charge" : 1,
+  "rating" : 5,
+  "courseId" : "iFt5000"
+}, {
+  "rating" : 4,
+  "courseId" : "IFT7000"
+}, {
+  "rating" : 4,
+  "comment" : "Champs manquants",
+  "courseId" : "IFT9000"
+}, {
+  "difficulty" : 1,
+  "charge" : 1,
+  "rating" : 5,
+  "comment" : "Super cours!",
+  "courseId" : "UNIQUE_1766941747186"
+}, {
+  "courseId" : "IFT1234"
+}, {
+  "difficulty" : 3,
+  "charge" : 2,
+  "rating" : 4,
+  "comment" : "Test comment",
+  "courseId" : "TEST1234"
+}, {
+  "rating" : 4,
+  "courseId" : "IFT2015"
+}, {
+  "rating" : 2,
+  "courseId" : "IFT2015"
+}, {
+  "difficulty" : 2,
+  "charge" : 1,
+  "rating" : 5,
+  "courseId" : "iFt5000"
+}, {
+  "rating" : 4,
+  "courseId" : "IFT7000"
+}, {
+  "rating" : 4,
+  "comment" : "Champs manquants",
+  "courseId" : "IFT9000"
 } ]
