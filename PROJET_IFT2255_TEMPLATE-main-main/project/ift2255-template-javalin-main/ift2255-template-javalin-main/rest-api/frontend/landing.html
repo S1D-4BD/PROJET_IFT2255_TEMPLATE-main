@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projet ift2255</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>OUTIL DE CONSEILS PLANIFIUM</h1>
+
+        <form id="login" onsubmit="login(event)">
+            <input type="text" id="credentials" placeholder="info" required>
+            <button type="submit">login</button>
+        </form>
+    </div>
+
+    <script>
+      function login(event){
+          event.preventDefault();
+          const input = document.getElementById('credentials').value;
+          const valides = ["20280089", "20279666", "20283304", "20249230","12345678"];
+
+          if (valides.includes(input)) { //if we ever find the matricule in the valid options
+            window.location.href = "index.html?matricule=" + input;
+          }
+          if (input == "12345"){
+            window.location.href = "index-admin.html?matricule=" + input;
+          }
+      }
+    </script>
+</body>
+</html>

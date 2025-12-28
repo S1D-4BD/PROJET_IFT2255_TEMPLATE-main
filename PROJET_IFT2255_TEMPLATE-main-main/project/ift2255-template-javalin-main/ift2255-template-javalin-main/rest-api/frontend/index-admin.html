@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projet ift2255</title>
+    <link rel="stylesheet" href="style.css">
+  <title>INDEX_ADMIN_PAGE</title>
+</head>
+<body>
+
+    <div class="container">
+        <h1>OUTIL DE CONSEILS PLANIFIUM</h1>
+        <div class="student-info">
+            <!--= simple pr moi de load info en allant chercher par id et remplacer text-content-->
+            <h4><b>Espace TGDE</b></h4>
+        </div>
+        <section>
+            <h2>Étudiants inscrits</h2>
+            <button onclick="loadUsers()">Charger les etudiants</button>
+            <div id="users-list"></div>
+        </section>
+
+        <section>
+            <h2>Courses</h2>
+            <div>
+                <input type="text" id="courseId" placeholder="Ex: mat1400">
+                <button onclick="loadCourse()">Chercher le cours</button>
+            </div>
+            <div id="course-info"></div>
+        </section>
+
+        <section>
+            <h2>Comparaison 2 cours</h2>
+            <div>
+                <input type="text" id="compare-courseA" placeholder="Cours A (ex: IFT1015)">
+                <input type="text" id="compare-courseB" placeholder="Cours B (ex: IFT3700)">
+                <button onclick="compareCourses()">Comparer</button>
+            </div>
+            <div id="compare-result"></div>
+        </section>
+
+
+
+        <h2>Avis form</h2>
+        <section class="avis-section">
+
+
+            <div>
+                <h3>Consulter les avis</h3>
+                <div class="myform avis-form">
+                    <input type="text" id="avis-search-coursebyid" placeholder="Ex: IFT1015">
+                    <button onclick="loadAvis()">Voir les avis</button>
+                    <button onclick="loadAvisStats()">Voir les stats</button>
+                    <div id="avis-list"></div>
+                </div>
+            </div>
+
+            <div>
+                <h3>Laisser un avis</h3>
+                <form id="createAvisForm" class="myform">
+                    <input type="text" id="avis-courseId" placeholder="Sigle (ABC1234)" required>
+                    <input type="number" id="avis-rating" placeholder="Note (1-5)" min="1" max="5" required>
+                    <input type="number" id="avis-difficulty" placeholder="Difficulté (1-5)" min="1" max="5" required>
+                    <input type="number" id="avis-charge" placeholder="Charge (1-5)" min="1" max="5" required>
+                    <input type="text" id="avis-comment" placeholder="Commentaire" required>
+                    <button type="submit">Envoyer</button>
+                </form>
+                <div id="avis-form-result"></div>
+            </div>
+        </section>
+
+
+        <!--
+        <section>
+            <h2>modifier une personne ??(juste tgde)</h2>
+            <form id="createUserForm">
+                <input type="text" id="userName" placeholder="Nom" required>
+                <input type="matricule" id="userMatricule" placeholder="Matricule" required>
+                <button type="submit">Créer</button>
+            </form>
+        </section>
+
+        -->
+    </div>
+
+    <script>
+        //const API_URL = 'http://localhost:3000';
+        const params = new URLSearchParams(window.location.search);
+        const matricule = params.get('matricule');
+
+        if (!matricule) {
+            window.location.href = "landing.html";
+            //oui cpas le top securité mais anyways
+        }
+
+        let currentStudent = null; //fetch les info de la personne
+        async function loadStudent() {
+            const response = await fetch(`http://localhost:3000/students/${matricule}`);
+            currentStudent = await response.json();
+
+            document.getElementById('student-name').textContent = currentStudent.name;
+            document.getElementById('student-matricule').textContent = currentStudent.matricule;
+            document.getElementById('completed-courses').textContent =
+                currentStudent.completedCourses.join(', ') || 'Aucun cours credité';
+        }
+
+        loadStudent();
+
+
+        async function compareCourses() {
+            const courseA = document.getElementById('compare-courseA').value.trim().toUpperCase();
+            const courseB = document.getElementById('compare-courseB').value.trim().toUpperCase();
+
+            if (!courseA || !courseB) {
+                showError('compare-result', 'Veuillez entrer deux cours à comparer');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/compare?courseA=${courseA}&courseB=${courseB}`);
+
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la comparaison');
+                }
+
+                const result = await response.json();
+                displayComparison(result, courseA, courseB);
+            } catch (error) {
+                showError('compare-result', error.message);
+            }
+        }
+
+        function displayComparison(result, courseA, courseB) {
+            const container = document.getElementById('compare-result');
+
+            let best_cour = '';
+            if (result.avgRatingA > result.avgRatingB) {
+                best_cour = `${courseA} >  ${courseB}`;
+            } else if (result.avgRatingB > result.avgRatingA) {
+                best_cour = `${courseB} >  ${courseA}`;
+            } else {
+                best_cour = 'Les deux cours ont la mm note';
+            }
+
+            container.innerHTML = `
+                <div class="course-card">
+                    <h3>Comparaison: ${courseA} vs ${courseB}</h3>
+
+                    <p><b>Note moyenne ${courseA}:</b> ${result.avgRatingA}/5</p>
+                    <p><b>Note moyenne ${courseB}:</b> ${result.avgRatingB}/5</p>
+                    <p><b>Différence de notes:</b> ${result.reviewScoreDifference}</p>
+
+                    <p><b>Différence de crédits:</b> ${result.creditDifference}</p>
+
+                    <p><b>${best_cour}</b></p>
+                </div>
+            `;
+        }
+
+    </script>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
