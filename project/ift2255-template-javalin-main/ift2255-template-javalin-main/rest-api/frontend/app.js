@@ -560,13 +560,10 @@
 ////////////////////////////////////////////////////////////////
 //horaire
 
+////////////////////////////////////////////////////////////////
+// HORAIRE
+
 var couleurs = ['#FFB3BA', '#BAFFC9', '#BAE1FF', '#FFFFBA', '#FFDFBa', '#E0BBE4'];
-
-function getCouleur(courseId) {
-    var index = panier.indexOf(courseId);
-    return couleurs[index % couleurs.length]; // CYCLIQUE, INCASE ON PERMET D'AJOUTER  + DE COURS , maix 6 c normalement le max
-}
-
 var panier = [];
 var grille = {
     'Lundi': {},
@@ -576,46 +573,165 @@ var grille = {
     'Vendredi': {}
 };
 
-async function addToHoraire() {
-    var courseId = document.getElementById('horaire-courseId').value.toUpperCase();
+var coursActuel = null;  // stocke les données du cours en cours de sélection
 
+function getCouleur(courseId) {
+    var index = panier.findIndex(p => p.courseId === courseId);
+    return couleurs[index % couleurs.length];
+}
+
+// Étape 1: Chercher les sections
+async function chercherSections() {
+    var courseId = document.getElementById('horaire-courseId').value.toUpperCase();
     if (!courseId) {
         alert('Entre un cours');
         return;
     }
+
+    var term = document.getElementById('horaire-term').value;
+    var year = document.getElementById('horaire-year').value;
+    var semester = term + year;
+
+    try {
+        var response = await fetch('http://localhost:3000/courses/' + courseId + '/full?semester=' + semester);
+        var data = await response.json();
+
+        if (!data.schedules || data.schedules.length === 0) {
+            alert('Aucun horaire trouvé pour ce cours');
+            return;
+        }
+
+        coursActuel = {
+            courseId: courseId,
+            schedule: data.schedules[0]
+        };
+
+        // Trouver les sections principales (celles avec TH)
+        var sections = [];
+        for (var i = 0; i < coursActuel.schedule.sections.length; i++) {
+            var section = coursActuel.schedule.sections[i];
+            for (var v = 0; v < section.volets.length; v++) {
+                if (section.volets[v].name === 'TH') {
+                    sections.push(section.name);
+                    break;
+                }
+            }
+        }
+
+        if (sections.length === 0) {
+            alert('Aucune section trouvée');
+            return;
+        }
+
+        // Remplir le select
+        var select = document.getElementById('section-select');
+        select.innerHTML = '';
+        for (var i = 0; i < sections.length; i++) {
+            select.innerHTML += '<option value="' + sections[i] + '">' + sections[i] + '</option>';
+        }
+
+        document.getElementById('section-choice').style.display = 'block';
+        document.getElementById('tp-choice').style.display = 'none';
+        chargerTPs();
+
+    } catch (e) {
+        alert('Erreur: ' + e.message);
+    }
+}
+
+// Étape 2: Charger les TPs pour la section choisie
+function chargerTPs() {
+    var sectionChoisie = document.getElementById('section-select').value;
+
+    // Trouver les TPs qui correspondent à cette section (ex: A → A101, A102)
+    var tps = [];
+    for (var i = 0; i < coursActuel.schedule.sections.length; i++) {
+        var section = coursActuel.schedule.sections[i];
+        // TP commence par la lettre de la section (A101 commence par A)
+        if (section.name.startsWith(sectionChoisie) && section.name !== sectionChoisie) {
+            for (var v = 0; v < section.volets.length; v++) {
+                if (section.volets[v].name === 'TP') {
+                    tps.push(section.name);
+                    break;
+                }
+            }
+        }
+    }
+
+    var select = document.getElementById('tp-select');
+    select.innerHTML = '';
+
+    if (tps.length === 0) {
+        select.innerHTML = '<option value="">Aucun TP</option>';
+    } else {
+        for (var i = 0; i < tps.length; i++) {
+            select.innerHTML += '<option value="' + tps[i] + '">' + tps[i] + '</option>';
+        }
+    }
+
+    document.getElementById('tp-choice').style.display = 'block';
+}
+
+// Étape 3: Confirmer l'ajout
+function confirmerAjout() {
     if (panier.length >= 6) {
         alert('Panier plein (max 6)');
         return;
     }
-    if (panier.includes(courseId)) {
-        alert('Cours deja dans le panier');
-        return;
+
+    var courseId = coursActuel.courseId;
+    var sectionChoisie = document.getElementById('section-select').value;
+    var tpChoisi = document.getElementById('tp-select').value;
+
+    // Vérifier si déjà dans le panier
+    for (var i = 0; i < panier.length; i++) {
+        if (panier[i].courseId === courseId) {
+            alert('Cours déjà dans le panier');
+            return;
+        }
     }
 
-    panier.push(courseId);
+    panier.push({
+        courseId: courseId,
+        section: sectionChoisie,
+        tp: tpChoisi,
+        schedule: coursActuel.schedule
+    });
+
+    // Reset
     document.getElementById('horaire-courseId').value = '';
-    await refreshHoraire(); // deja ce truc faut le load en demarrage de pag
+    document.getElementById('section-choice').style.display = 'none';
+    document.getElementById('tp-choice').style.display = 'none';
+    coursActuel = null;
+
+    refreshHoraire();
 }
 
 function removeFromHoraire(courseId) {
-    panier = panier.filter(c => c !== courseId);
+    panier = panier.filter(p => p.courseId !== courseId);
     refreshHoraire();
 }
 
 function clearHoraire() {
     panier = [];
+    document.getElementById('section-choice').style.display = 'none';
+    document.getElementById('tp-choice').style.display = 'none';
     refreshHoraire();
 }
 
-async function refreshHoraire() {
+function refreshHoraire() {
     document.getElementById('horaire-count').textContent = panier.length;
 
+    // Afficher panier
     var panierHtml = '';
     for (var i = 0; i < panier.length; i++) {
-        panierHtml += '<span>' + panier[i] + ' <button onclick="removeFromHoraire(\'' + panier[i] + '\')">X</button></span> ';
+        var p = panier[i];
+        var label = p.courseId + ' (' + p.section + (p.tp ? '/' + p.tp : '') + ')';
+        panierHtml += '<span>' + label + ' <button onclick="removeFromHoraire(\'' + p.courseId + '\')">X</button></span> ';
     }
     document.getElementById('horaire-panier').innerHTML = panierHtml || '<p>Panier vide</p>';
 
+    // Reset grille
     grille = {
         'Lundi': {},
         'Mardi': {},
@@ -624,99 +740,81 @@ async function refreshHoraire() {
         'Vendredi': {}
     };
 
+    // Remplir la grille
     for (var i = 0; i < panier.length; i++) {
-        await loadCourseSchedule(panier[i]);
+        ajouterCoursAGrille(panier[i]);
     }
 
     afficherGrille();
 }
 
-    async function loadCourseSchedule(courseId) {
-        try {
+function ajouterCoursAGrille(coursData) {
+    var joursMap = {
+        'Lu': 'Lundi',
+        'Ma': 'Mardi',
+        'Me': 'Mercredi',
+        'Je': 'Jeudi',
+        'Ve': 'Vendredi'
+    };
 
-            var term = document.getElementById('horaire-term').value;
-            var year = document.getElementById('horaire-year').value;
-            var semester = term + year;
+    var schedule = coursData.schedule;
+    var courseId = coursData.courseId;
 
-            var response = await fetch('http://localhost:3000/courses/' + courseId + '/full?semester=' + semester);
-            //var response = await fetch('http://localhost:3000/courses/' + courseId + '/full');
-            var data = await response.json();
+    for (var s = 0; s < schedule.sections.length; s++) {
+        var section = schedule.sections[s];
 
-            var joursMap = {
-                'Lu': 'Lundi',
-                'Ma': 'Mardi',
-                'Me': 'Mercredi',
-                'Je': 'Jeudi',
-                'Ve': 'Vendredi'
-            };
+        //////
+        if (section.name !== coursData.section && section.name !== coursData.tp) continue;
+        if (!section.volets) continue;
 
-            if (!data.schedules || data.schedules.length === 0) return;
+        for (var v = 0; v < section.volets.length; v++) {
+            var volet = section.volets[v];
+            if (volet.name !== 'TH' && volet.name !== 'TP') continue;
 
-            var schedule = data.schedules[0];
-            var section = schedule.sections[0];
+            var label = courseId;
+            if (volet.name === 'TP') {
+                label = courseId + ' (TP)';
+            }
 
-            for (var v = 0; v < section.volets.length; v++) {
-                var volet = section.volets[v];
+            for (var a = 0; a < volet.activities.length; a++) {
+                var activity = volet.activities[a];
+                var cases = getCasesEntreHeures(activity.start_time, activity.end_time);
 
-                if (volet.name !== 'TH' && volet.name !== 'TP') continue;
+                for (var d = 0; d < activity.days.length; d++) {
+                    var jour = joursMap[activity.days[d]];
 
-                for (var a = 0; a < volet.activities.length; a++) {
-                    var activity = volet.activities[a];
-                    var debut = activity.start_time;
-                    var fin = activity.end_time;
-                    //permet de remplir tt les cases occupant la duree d un cours
-
-                    var cases = getCasesEntreHeures(debut, fin);
-
-                    for (var d = 0; d < activity.days.length; d++) {
-                        var jourAbr = activity.days[d];
-                        var jour = joursMap[jourAbr];
-
-                        if (jour && grille[jour]) {
-                            for (var c = 0; c < cases.length; c++) {
-                                if (grille[jour][cases[c]]) {
-                                    if (!grille[jour][cases[c]].includes(courseId)) { /// SI YA DEJA UN COURS, -> ALORS ON A LE CONLFIT
-                                        grille[jour][cases[c]] += ' / ' + courseId; //montrer les 2 cors en conflit
-                                    }
-                                } else {
-                                    grille[jour][cases[c]] = courseId;
+                    if (jour && grille[jour]) {
+                        for (var c = 0; c < cases.length; c++) {
+                            if (grille[jour][cases[c]]) {
+                                if (!grille[jour][cases[c]].includes(courseId)) {
+                                    grille[jour][cases[c]] += ' / ' + label;
                                 }
+                            } else {
+                                grille[jour][cases[c]] = label;
                             }
                         }
                     }
                 }
             }
-        } catch (e) {
-            console.log('Erreur pour ' + courseId, e);
         }
     }
+}
 
-    function getCasesEntreHeures(debut, fin) {
-        var heures = ['08:00', '08:30','09:00', '09:30','10:00', '10:30','11:00', '11:30','12:00', '12:30','13:00', '13:30','14:00', '14:30','15:00', '15:30','16:00', '16:30','17:00', '17:30','18:00', '18:30','19:00', '19:30','20:00', '20:30']; //on peut enlever ou ajouter incase, jme sie au centre etudiant
+function getCasesEntreHeures(debut, fin) {
+    var heures = ['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30'];
+    var result = [];
+    var started = false;
 
-        var result = [];
-        var started = false;
-
-        for (var i = 0; i < heures.length; i++) {
-            var h = heures[i];
-
-            if (h === debut) {
-                started = true;
-            }
-            if (started) {
-                result.push(h);
-            }
-
-            if (started && h >= fin) {
-                break;
-            }
-        }
-
-        return result;
+    for (var i = 0; i < heures.length; i++) {
+        if (heures[i] === debut) started = true;
+        if (started) result.push(heures[i]);
+        if (started && heures[i] >= fin) break;
     }
+    return result;
+}
 
 function afficherGrille() {
-    var heures = ['08:00', '08:30','09:00', '09:30','10:00', '10:30','11:00', '11:30','12:00', '12:30','13:00', '13:30','14:00', '14:30','15:00', '15:30','16:00', '16:30','17:00', '17:30','18:00', '18:30','19:00', '19:30','20:00', '20:30'];
+    var heures = ['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30'];
     var jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'];
 
     var html = '';
@@ -724,7 +822,9 @@ function afficherGrille() {
         html += '<tr><td>' + heures[i] + '</td>';
         for (var j = 0; j < jours.length; j++) {
             var cours = grille[jours[j]][heures[i]] || '';
-            if (cours) {
+            if (cours.includes('/')) {
+                html += '<td style="background-color:red; color:white">' + cours + '</td>';
+            } else if (cours) {
                 html += '<td style="background-color:' + getCouleur(cours) + '">' + cours + '</td>';
             } else {
                 html += '<td></td>';
@@ -732,11 +832,13 @@ function afficherGrille() {
         }
         html += '</tr>';
     }
-
     document.getElementById('horaire-body').innerHTML = html;
 }
 
-
+window.addEventListener('load', () => {
+    loadCSV();
+    refreshHoraire();
+});
     window.addEventListener('load', () => {
     //loadUsers();
     loadCSV();

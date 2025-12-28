@@ -287,7 +287,7 @@ form {
     border-radius: 15px;
 }
 
-#horaire-panier button {
+#horaire-panier button { /*le petit x, j'arrivait pas a import une font*/
     background: none;
     border: none;
     color: red;
