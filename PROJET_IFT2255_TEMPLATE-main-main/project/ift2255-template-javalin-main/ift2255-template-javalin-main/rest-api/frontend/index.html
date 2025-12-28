@@ -67,6 +67,57 @@
             <div id="compare-result"></div>
         </section>
 
+        <section>
+            <h2>Section Horaire</h2>
+
+    
+            <input type="text" id="horaire-courseId" placeholder="Ex: IFT1015">
+            <select id="horaire-term">
+                <option value="h">Hiver</option>
+                <option value="e">Été</option>
+                <option value="a" selected>Automne</option>
+            </select>
+            <select id="horaire-year">
+                <option value="25" selected>2025</option>
+                <option value="26">2026</option>
+            </select>
+            <button onclick="chercherSections()">Chercher</button>
+
+    
+            <div id="section-choice" style="display:none; margin-top:10px;">
+                <label>Section: </label>
+                <select id="section-select" onchange="chargerTPs()"></select>
+            </div>
+
+            <div id="tp-choice" style="display:none; margin-top:10px;">
+                <label>TP: </label>
+                <select id="tp-select"></select>
+                <button onclick="confirmerAjout()">Ajouter à l'horaire</button>
+            </div>
+
+            <button onclick="clearHoraire()" style="margin-top:10px;">Vider tout</button>
+
+            <h3>Panier (<span id="horaire-count">0</span>/6)</h3>
+            <div id="horaire-panier"></div>
+
+            <h3>Grille horaire</h3>
+            <table border="1" id="horaire-table">
+                <thead>
+                    <tr>
+                        <th>Heure</th>
+                        <th>Lundi</th>
+                        <th>Mardi</th>
+                        <th>Mercredi</th>
+                        <th>Jeudi</th>
+                        <th>Vendredi</th>
+                    </tr>
+                </thead>
+                <tbody id="horaire-body">
+                </tbody>
+        </table>
+    </section>
+
+
         <h2>Avis form</h2>
         <section class="avis-section">
 
