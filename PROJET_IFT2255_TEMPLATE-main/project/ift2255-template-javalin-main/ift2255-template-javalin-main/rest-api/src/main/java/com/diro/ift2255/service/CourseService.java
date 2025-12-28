@@ -8,6 +8,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.net.URI;
 import java.util.*;
 
+/**
+ * Service responsable de la gestion et de la récupération des données liées aux cours
+*/
 public class CourseService {
     private final HttpClientApi clientApi;
     private static final String BASE_URL = "https://planifium-api.onrender.com/api/v1/courses";
@@ -16,6 +19,11 @@ public class CourseService {
         this.clientApi = clientApi;
     }
 
+    /**
+     * Récupère tous les cours, avec possibilité d'appliquer des paramètres de filtrage.
+     * @param queryParams
+     * @return
+     */
     public List<Course> getAllCourses(Map<String, String> queryParams) {
         Map<String, String> params = (queryParams == null) ? Collections.emptyMap() : queryParams;
 
@@ -25,10 +33,21 @@ public class CourseService {
         return courses;
     }
 
+    /**
+     * Récupère un cours selon son identifiant.
+     * @param courseId
+     * @return
+     */
     public Optional<Course> getCourseById(String courseId) {
         return getCourseById(courseId, null);
     }
 
+    /**
+     * Récupère un cours selon son identifiant, avec paramètres supplémentaires.
+     * @param courseId
+     * @param queryParams
+     * @return
+     */
     public Optional<Course> getCourseById(String courseId, Map<String, String> queryParams) {
         Map<String, String> params = (queryParams == null) ? Collections.emptyMap() : queryParams;
         URI uri = HttpClientApi.buildUri(BASE_URL + "/" + courseId, params);
@@ -41,6 +60,12 @@ public class CourseService {
         }
     }
 
+    /**
+     * Compare deux cours selon plusieurs critères (crédits, avis, sessions..)
+     * @param courseIdA
+     * @param courseIdB
+     * @return
+     */
     public ComparaisonResult compareCourses(String courseIdA, String courseIdB) {
         Optional<Course> courseAOpt = getCourseById(courseIdA);
         Optional<Course> courseBOpt = getCourseById(courseIdB);
@@ -56,11 +81,23 @@ public class CourseService {
         return comparaison.buildResult();
     }
 
+    /**
+     * Vérifie si deux cours existent.
+     * @param courseIdA
+     * @param courseIdB
+     * @return
+     */
     public boolean validateCourses(String courseIdA, String courseIdB) {
         return getCourseById(courseIdA).isPresent()
             && getCourseById(courseIdB).isPresent();
     }
 
+    /**
+     * Recherche des cours selon un sigle ou un mot-clé.
+     * @param sigle
+     * @param keyword
+     * @return
+     */
     public List<Course> searchCourses(String sigle, String keyword) {
 
         // Récupération de tous les cours depuis l'API
@@ -88,7 +125,12 @@ public class CourseService {
         return courses;
     }
 
-
+    /**
+     * Récupère les cours associés à un programme donné.
+     * @param programCode
+     * @param includeDetails
+     * @return
+     */
     public List<Course> getCoursesByProgram(String programCode, boolean includeDetails) {
         if (programCode == null || programCode.isBlank()) {
             return List.of();
